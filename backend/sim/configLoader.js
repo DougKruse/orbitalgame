@@ -1,9 +1,11 @@
 import * as gen from './shapes/generators.js';
-import { makeBody } from './body.js';
+import { Body } from './Body.js';
 import { readFileSync } from 'fs';
+import { World } from './world.js';
 
 export function loadWorldConfig(json) {
-    const world = { time: 0, bodies: [] };
+    // const world = { time: 0, bodies: [] };
+    const world = new World();
 
     for (const b of json.bodies) {
         // 1) build the shape via the named factory
@@ -17,11 +19,15 @@ export function loadWorldConfig(json) {
         const [x, y] = b.position;
         const [vx = 0, vy = 0] = b.velocity || [];
         const { angle = 0, omega = 0 } = b.rotation || {};
+        const mass = b.mass || shape.areaApprox;
 
         // 3) create the body with optional mass override
-        const body = makeBody(shape, x, y, vx, vy, angle, omega, b.mass);
+        // console.log(shape);
+        const body = new Body({shape, position: [x, y] ,
+            velocity: [vx, vy], rotation: {angle, omega}, mass}
+        );
 
-        world.bodies.push(body);
+        world.addBody(body);
     }
 
     return world;

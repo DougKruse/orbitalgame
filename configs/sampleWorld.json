@@ -1,10 +1,10 @@
 {
   "bodies": [
     {
-      "shape": { "generator": "circle", "args": [32, 120] },
+      "shape": { "generator": "circle", "args": [32, 100] },
       "position": [50, 0],
       "velocity": [0, 0],
-      "rotation": { "angle": 0, "omega": 0 },
+      "rotation": { "angle": 10, "omega": 0 },
       "mass": null
     },
     {

@@ -10,6 +10,19 @@ connect((state) => {
     world = state;
 });
 
+
+// canvas.addEventListener('click', e => {
+//     const rect = canvas.getBoundingClientRect();
+//     const payload = {
+//         type: 'click',
+//         x: e.clientX - rect.left,
+//         y: e.clientY - rect.top
+//     };
+//     ws.send(JSON.stringify(payload));
+// });
+
+
+
 function drawBody(ctx, body) {
     const { r, spokes } = body.shape;
     // console.log(r);

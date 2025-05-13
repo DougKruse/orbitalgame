@@ -3,7 +3,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { bus } from './eventBus.js';
 import chokidar from 'chokidar';
-import { loadWorldConfig, loadConfig } from '../sim/configLoader.js';
+import { loadConfig } from '../sim/configLoader.js';
 import { SimLoop } from '../sim/tick.js';
 import { setupSocket } from './socket.js';
 

@@ -29,6 +29,7 @@ export class SimLoop {
         for (const b of this.world.bodies) {
             b.x += b.vx * this.dt;
             b.y += b.vy * this.dt;
+
             if (b.omega) {
                 // Prevent angle from growing infinitely
                 b.angle = (b.angle + b.omega * this.dt) % (2 * Math.PI);
@@ -37,4 +38,4 @@ export class SimLoop {
         
         bus.emit('state', this.world);
     }
-}
+};

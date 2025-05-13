@@ -1,17 +1,6 @@
-export function makeBody(shape, x = 0, y = 0, vx = 0, vy = 0, angle = 0, omega = 0, mass = null) {
-    return {
-        shape,
-        x, y,
-        vx, vy,
-        angle,
-        omega,
-        mass: mass ?? shape.areaApprox  // default mass if not specified
-    };
-}
-class Body {
+export class Body {
     constructor({ shape, position, velocity, rotation, mass }) {
         this.shape = shape;
-
         const [x, y] = position || [0, 0];
         const [vx, vy] = velocity || [0, 0];
         const { angle = 0, omega = 0 } = rotation || {};
@@ -22,7 +11,7 @@ class Body {
         this.vy = vy;
         this.angle = angle;
         this.omega = omega;
-        this.mass = mass ?? shape.areaApprox;
+        this.mass = mass;
     }
 
     // Optional: derived helpers
