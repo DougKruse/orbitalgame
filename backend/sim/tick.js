@@ -20,6 +20,10 @@ export class SimLoop {
         this.timerId = null;
     }
 
+    getWorld() {
+        return this.world;
+    }
+
     setWorld(newWorld) {
         this.world = newWorld;
     }

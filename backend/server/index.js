@@ -6,6 +6,7 @@ import chokidar from 'chokidar';
 import { loadConfig } from '../sim/configLoader.js';
 import { SimLoop } from '../sim/tick.js';
 import { setupSocket } from './socket.js';
+import { setupController } from '../sim/controller.js';
 
 const CONFIG = 'configs/sampleWorld.json';
 
@@ -20,6 +21,7 @@ export function startServer() {
     bus.emit('state', world);
 
     const sim = new SimLoop(world);
+    setupController(sim);
 
     httpServer.listen(3000, () => {
         console.log('Listening on http://localhost:3000');

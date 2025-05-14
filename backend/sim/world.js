@@ -15,7 +15,9 @@ export class World {
     }
 
     spawnProjectileAt( x, y ){
-        const projectile = new Projectile(x, y);
+        console.log( x + ' ' + y );
+        const projectile = new Projectile({ position : [x, y] });
+        this.addBody(projectile);
     }
 
 }

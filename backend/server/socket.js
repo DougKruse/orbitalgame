@@ -9,8 +9,10 @@ export function setupSocket(server) {
         clients.add(ws);
 
         ws.on('message', raw => {
-            let { event, data } = JSON.parse(raw);
-            // bus.emit(event, data, ws);
+            let { type, payload } = JSON.parse(raw);
+            // include sender reference if needed
+            console.log(type);
+            bus.emit(type, { ...payload, client: ws });
         });
 
         ws.on('close', () => clients.delete(ws));
@@ -30,13 +32,7 @@ export function setupSocket(server) {
         }
     });
 
-    bus.on('makeBullet', ({ x, y, client }) => {
-        // convert screen‐coords→world‐coords if needed
-        // spawn a projectile, select an object, whatever your game needs:
-        world.spawnProjectileAt([x, y]);
-        // if you need to reply only to that one client:
-        client.send(JSON.stringify({ event: 'ack', x, y }));
-    });
+    
 
     return;
 }

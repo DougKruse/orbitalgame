@@ -1,25 +1,37 @@
 import { connect } from './client.js';
+import { clientBus } from './clientBus.js';
 
 const canvas = document.getElementById('main');
 const ctx = canvas.getContext('2d');
 
 let world = null;
+connect();
 
-connect((state) => {
-    // console.log("received update", state); 
-    world = state;
+clientBus.on('STATE_UPDATE', (payload) => {
+    for (const body of payload.bodies) {
+        const shape = body.shape;
+        const n = shape.spokes;
+        const repaired = new Float32Array(n);
+        for (let i = 0; i < n; i++) {
+            repaired[i] = shape.r[i];
+        }
+        shape.r = repaired;
+    }
+    world = payload;
 });
 
-
-// canvas.addEventListener('click', e => {
-//     const rect = canvas.getBoundingClientRect();
-//     const payload = {
-//         type: 'click',
-//         x: e.clientX - rect.left,
-//         y: e.clientY - rect.top
-//     };
-//     ws.send(JSON.stringify(payload));
-// });
+canvas.addEventListener('click', e => {
+    const rect = canvas.getBoundingClientRect();
+    const typeAndPayload = {
+        type: 'makeBullet',
+        payload: { 
+            x: e.clientX - rect.width/2,
+            y: e.clientY - rect.height/2
+        }
+    };
+    // console.log(rect);
+    clientBus.emit('send', typeAndPayload);
+});
 
 
 
