@@ -2,22 +2,29 @@
   "bodies": [
     {
       "shape": { "generator": "circle", "args": [32, 100] },
-      "position": [50, 0],
+      "position": [50, -200],
       "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": 0 },
-      "mass": null
+      "rotation": { "angle": 10, "omega": 0 }
     },
     {
       "shape": { "generator": "box", "args": [25, 200, 150] },
-      "position": [300, 0],
+      "position": [300, -200],
       "velocity": [0, 0],
       "rotation": { "angle": 0, "omega": 1 }
     },
     {
       "shape": { "generator": "hilly", "args": [64, 120, 30, 10] },
-      "position": [-250, 0],
+      "position": [-250, -200],
       "velocity": [0, 0],
       "rotation": { "angle": 10, "omega": -0.5 }
+    }
+  ],
+  "playerObjects": [
+    {
+      "shape": { "generator": "offsetBox", "args": [64, 20, 100] },
+      "position": [-200, 320],
+      "velocity": [0, 0],
+      "rotation": { "angle": 3.14, "omega": 0 }
     }
   ]
 }

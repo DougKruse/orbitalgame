@@ -28,6 +28,11 @@ export class SimLoop {
         this.world = newWorld;
     }
 
+    toggle() {
+        if (this.timerId) this.stop();
+        else this.start();
+    }
+
     _step() {
         this.world.time += this.dt;
         for (const b of this.world.bodies) {

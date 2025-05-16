@@ -6,7 +6,7 @@ export function connect(onMessage) {
     ws.onmessage = (e) => {
         const { type, payload } = JSON.parse(e.data);
         // rebroadcast from network to local bus
-        clientBus.emit(type, payload);  
+        clientBus.emit(type, payload);
         
         return ws;
     };

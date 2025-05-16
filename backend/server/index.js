@@ -13,6 +13,8 @@ const CONFIG = 'configs/sampleWorld.json';
 export function startServer() {
     const app = express();
     app.use(express.static('frontend'));
+    app.use('/shared', express.static('shared'));
+
     
     const httpServer = createServer(app);
     setupSocket(httpServer);

@@ -7,7 +7,7 @@ export function loadWorldConfig(json) {
     // const world = { time: 0, bodies: [] };
     const world = new World();
 
-    for (const b of json.bodies) {
+    for (const b of [...json.bodies, ...json.playerObjects]) {
         // 1) build the shape via the named factory
         const { generator, args } = b.shape;
         if (typeof gen[`make${capitalize(generator)}`] !== 'function') {

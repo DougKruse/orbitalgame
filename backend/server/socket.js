@@ -32,7 +32,12 @@ export function setupSocket(server) {
         }
     });
 
-    
+    bus.on('sendAllClients', ({ type, payload }) => {
+        for (const ws of clients) {
+            if (ws.readyState === 1) ws.send(JSON.stringify({ type, payload }));
+        }
+        console.log('Sending: ' + type);
+    });
 
     return;
 }
