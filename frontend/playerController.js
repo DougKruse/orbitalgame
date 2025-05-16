@@ -2,7 +2,7 @@ import * as at from "../shared/angleTools.js";
 import { isPausedLocally } from "./canvas.js";
 
 export const playerState = {
-    target: null,  // e.g. id or index of body
+    targetID: null,  // e.g. id or index of body
     mouse: { x: 0, y: 0 },
     locked: false,
     aimAngle: 0,
@@ -28,8 +28,8 @@ export function registerMouseControl(canvas) {
 
 //called on tick
 export function updatePlayerControl(world) {
-    if (!playerState.target || !world) return;
-    const body = world.bodies[playerState.target];
+    if (!playerState.targetID || !world) return;
+    const body = world.bodies.find(b => b.ID === playerState.targetID);
     const dx = playerState.mouse.x - body.x;
     const dy = playerState.mouse.y - body.y;
 

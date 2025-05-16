@@ -17,7 +17,10 @@ let isPausedServer = false;
 connect();
 
 registerMouseControl(canvas);
-playerState.target = 3;
+playerState.targetID = 'player0';
+function findPlayer( world ){
+    return world.bodies.find(b => b.ID === playerState.targetID);
+}
 
 
 document.getElementById('pauseBtn').addEventListener('click', () => {
@@ -25,11 +28,11 @@ document.getElementById('pauseBtn').addEventListener('click', () => {
 
     if (playerState.locked && !isPausedLocally) {
         // Fire signal to server
-        const body = (clientWorld || world).bodies[playerState.target];
+        const playerB = findPlayer(clientWorld || world);
 
-        const barrelLength = body.shape.rMax;
-        const tipX = body.x + Math.cos(playerState.aimAngle) * barrelLength;
-        const tipY = body.y + Math.sin(playerState.aimAngle) * barrelLength;
+        const barrelLength = playerB.shape.rMax;
+        const tipX = playerB.x + Math.cos(playerState.aimAngle) * barrelLength;
+        const tipY = playerB.y + Math.sin(playerState.aimAngle) * barrelLength;
 
         clientBus.emit('send', {
             type: 'fireBullet',
@@ -96,12 +99,11 @@ function draw() {
     // console.log("drawing..."); 
     if (!world) return;
 
-    if (playerState.target != null && isPausedLocally) {
+    if (playerState.targetID != null && isPausedLocally) {
         updatePlayerControl(clientWorld);
         updateFireStateUI();
-        const b = clientWorld.bodies[playerState.target];
-        console.log(clientWorld.bodies);
-        b.angle = at.normalizeAngle(b.angle + b.omega);
+        const playerB = findPlayer(clientWorld)
+        playerB.angle = at.normalizeAngle(playerB.angle + playerB.omega);
         // if (b.angle < 0) b.angle += 2 * Math.PI;
     }
     // console.log(playerState.aimAngle);
@@ -127,9 +129,6 @@ draw();
 
 function updateFireStateUI() {
     document.getElementById('fireState').textContent =
-        `Locked: ${playerState.locked}, Aim: ${Math.round(clientWorld.bodies[playerState.target].angle * 180 / Math.PI)}°`;
+        `Locked: ${playerState.locked}, Aim: ${Math.round(findPlayer(clientWorld).angle * 180 / Math.PI)}°`;
 }
-
-
-
 
