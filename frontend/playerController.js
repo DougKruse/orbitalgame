@@ -43,11 +43,9 @@ export function updatePlayerControl(world) {
 
     const currentAngle = body.angle;
 
-    // let delta = targetAngle - currentAngle;
+    //todo: investigate why need to adjust by quarter rotation, difference in how angle is interpreted between canvas and server?
     const delta = at.shortestPositiveDelta(body.angle, targetAngle) - Math.PI/2;
 
-    // Normalize angle difference to [-π, π]
-    // delta = ((delta + Math.PI) % (2 * Math.PI)) + Math.PI/2;
 
     const rotateSpeed = 0.3; // higher is snappier
     body.omega = delta * rotateSpeed; // apply angular velocity

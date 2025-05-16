@@ -5,16 +5,19 @@ export class Projectile extends Body {
     constructor({ position, velocity, rotation }) {
         const shape = Projectile.defaultShape();
         const mass = 0;
-        const fakeMass = 0.5;
-        super({ shape, position, velocity, rotation, mass });
+        const fakeVelocity = [0, 0];
+        super({ shape, position, fakeVelocity, rotation, mass });
+        this.fakeMass = 0.5;
     }
 
     static defaultShape() {
         return gen.makeCircle(16, 5);
     }
-    impulse(intensity = 1, angleOverride = this.angle) {
-        const dvx = Math.cos(angleOverride) * intensity;
-        const dvy = Math.sin(angleOverride) * intensity;
+    impulse(intensity = 0, angleOverride) {
+        const angle = angleOverride ?? this.angle;
+        const dvx = Math.cos(angle) * intensity;
+        const dvy = Math.sin(angle) * intensity;
+
         this.vx += dvx;
         this.vy += dvy;
     }

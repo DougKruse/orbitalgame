@@ -37,11 +37,19 @@ document.getElementById('pauseBtn').addEventListener('click', () => {
         clientBus.emit('send', {
             type: 'fireBullet',
             payload: {
-                x: tipX,
-                y: tipY,
+                pos: [tipX, tipY],
+                unitVelocity: 100,
                 angle: playerState.aimAngle,
             },
         });
+        clientBus.emit('send', {
+            type: 'setAim',
+            payload: {
+                bodyID: playerState.targetID,
+                angle: playerState.aimAngle - Math.PI/2, //unsure why need to fix
+            },
+        });
+
         playerState.locked = false;
         updateFireStateUI();
     }
@@ -104,7 +112,7 @@ function draw() {
         updateFireStateUI();
         const playerB = findPlayer(clientWorld)
         playerB.angle = at.normalizeAngle(playerB.angle + playerB.omega);
-        // if (b.angle < 0) b.angle += 2 * Math.PI;
+
     }
     // console.log(playerState.aimAngle);
     // updateFireStateUI();

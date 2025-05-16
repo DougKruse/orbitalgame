@@ -14,9 +14,13 @@ export class World {
         //Physics
     }
 
-    spawnProjectileAt( x, y ){
-        console.log( x + ' ' + y );
-        const projectile = new Projectile({ position : [x, y] });
+    spawnProjectileAt( [x, y], velocity, rotation ){
+        const projectile = new Projectile({
+            position : [x, y],
+            velocity: velocity,
+            rotation: rotation
+         });
+        projectile.impulse(velocity);
         this.addBody(projectile);
     }
 
