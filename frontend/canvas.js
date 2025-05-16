@@ -11,7 +11,7 @@ const cy = canvas.height / 2;
 
 let world = null;
 let clientWorld = null;
-let isPausedLocally = false;
+export let isPausedLocally = false;
 let isPausedServer = false;
 
 connect();
@@ -100,6 +100,7 @@ function draw() {
         updatePlayerControl(clientWorld);
         updateFireStateUI();
         const b = clientWorld.bodies[playerState.target];
+        console.log(clientWorld.bodies);
         b.angle = at.normalizeAngle(b.angle + b.omega);
         // if (b.angle < 0) b.angle += 2 * Math.PI;
     }

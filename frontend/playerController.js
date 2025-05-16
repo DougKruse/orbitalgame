@@ -1,4 +1,5 @@
 import * as at from "../shared/angleTools.js";
+import { isPausedLocally } from "./canvas.js";
 
 export const playerState = {
     target: null,  // e.g. id or index of body
@@ -19,11 +20,13 @@ export function registerMouseControl(canvas) {
 
     });
     canvas.addEventListener('click', e => {
+        if (!isPausedLocally) return;
         const rect = canvas.getBoundingClientRect();
         playerState.locked = !playerState.locked;
     });
 }
 
+//called on tick
 export function updatePlayerControl(world) {
     if (!playerState.target || !world) return;
     const body = world.bodies[playerState.target];

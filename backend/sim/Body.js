@@ -1,3 +1,4 @@
+let bodyID = 0;
 export class Body {
     constructor({ shape, position, velocity, rotation, mass }) {
         this.shape = shape;
@@ -12,6 +13,7 @@ export class Body {
         this.angle = angle;
         this.omega = omega;
         this.mass = mass;
+        this.ID  = 'body' + bodyID++; 
     }
 
     // Optional: derived helpers
