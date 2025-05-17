@@ -1,4 +1,5 @@
 import { bus } from '../server/eventBus.js';
+import { Physics } from './physics.js';
 
 const DT = 1 / 60;
 
@@ -34,17 +35,7 @@ export class SimLoop {
     }
 
     _step() {
-        this.world.time += this.dt;
-        for (const b of this.world.bodies) {
-            b.x += b.vx * this.dt;
-            b.y += b.vy * this.dt;
-
-            if (b.omega) {
-                // Prevent angle from growing infinitely
-                b.angle = (b.angle + b.omega * this.dt) % (2 * Math.PI);
-            }
-        }
-        
+        Physics.step(this.world, this.dt);
         bus.emit('state', this.world);
     }
 };

@@ -24,13 +24,14 @@ export function setupSocket(server) {
     bus.on('state', state => {
         const message = {
             type: 'STATE_UPDATE',
-            payload: state,
+            payload: convertStateForJSON(state),
         };
         const msgString = JSON.stringify(message);
         for (const ws of clients) {
             if (ws.readyState === 1) ws.send(msgString);
         }
     });
+
 
     bus.on('sendAllClients', ({ type, payload }) => {
         for (const ws of clients) {
@@ -40,4 +41,27 @@ export function setupSocket(server) {
     });
 
     return;
+}
+
+function convertShapeForJSON(shape) {
+    return {
+        ...shape,
+        angles: Array.from(shape.angles),
+        r: Array.from(shape.r),
+        // keep rAvg, rMax, areaApprox as-is
+    };
+}
+
+function convertBodyForJSON(body) {
+    return {
+        ...body,
+        shape: convertShapeForJSON(body.shape)
+    };
+}
+
+function convertStateForJSON(state) {
+    return {
+        ...state,
+        bodies: state.bodies.map(convertBodyForJSON)
+    };
 }

@@ -68,12 +68,13 @@ clientBus.on('paused', (payload) => {
 clientBus.on('STATE_UPDATE', (payload) => {
     for (const body of payload.bodies) {
         const shape = body.shape;
-        const n = shape.spokes;
-        const repaired = new Float32Array(n);
-        for (let i = 0; i < n; i++) {
-            repaired[i] = shape.r[i];
+        // Ensure r and angles are Float32Array, not regular arrays
+        if (!(shape.r instanceof Float32Array)) {
+            shape.r = new Float32Array(shape.r);
         }
-        shape.r = repaired;
+        if (!(shape.angles instanceof Float32Array)) {
+            shape.angles = new Float32Array(shape.angles);
+        }
     }
     isPausedServer = false;
     world = payload;
@@ -82,17 +83,37 @@ clientBus.on('STATE_UPDATE', (payload) => {
 
 
 
+let sanitylimit = 0;
 
 
 function drawBody(ctx, body) {
-    const { r, spokes } = body.shape;
-    // console.log(r);
-    const angle = body.angle;
-    const step = (2 * Math.PI) / spokes;
+    if ( sanitylimit < 6 ){
+        console.log(body);
+        sanitylimit++;
+    }
+
+    const { angles, r } = body.shape;
+    const spokeCount = angles.length;
+
+    // === Draw spokes in light green ===
     ctx.beginPath();
-    for (let i = 0; i <= spokes; i++) {
-        const θ = i * step + angle;
-        const dist = r[i % spokes];
+    ctx.strokeStyle = 'lightgreen';
+    for (let i = 0; i < spokeCount; i++) {
+        const θ = angles[i] + body.angle;
+        const dist = r[i];
+        const px = body.x + Math.cos(θ) * dist;
+        const py = body.y + Math.sin(θ) * dist;
+        ctx.moveTo(body.x, body.y);
+        ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // === Draw body outline in black ===
+    ctx.beginPath();
+    ctx.strokeStyle = 'black';
+    for (let i = 0; i <= spokeCount; i++) {
+        const θ = angles[i % spokeCount] + body.angle;
+        const dist = r[i % spokeCount];
         const px = body.x + Math.cos(θ) * dist;
         const py = body.y + Math.sin(θ) * dist;
         if (i === 0) ctx.moveTo(px, py);

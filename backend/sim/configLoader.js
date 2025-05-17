@@ -16,7 +16,7 @@ export function loadWorldConfig(json) {
     // playerObjects
     json.playerObjects.forEach((b, i) => {
         const body = createBody(b);
-        body.ID = `player${i}`; // or whatever ID scheme fits
+        body.ID = `player${i}`;
 
         world.addBody(body);
     });
