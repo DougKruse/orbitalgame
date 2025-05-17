@@ -14,7 +14,7 @@ export function analyzeShape(shape) {
     shape.rMax = max;
     // Approximate area: average radius treated as a circle
     shape.areaApprox = Math.PI * shape.rAvg * shape.rAvg;
-    
+
     shape.normals = computeSpokeNormals(shape);
 
     return shape;
@@ -103,7 +103,7 @@ export function checkSpokeCollision(bodyA, bodyB) {
     return dist < (rA + rB);
 }
 
-function radiusAtAngle(body, globalAngle) {
+export function radiusAtAngle(body, globalAngle) {
     const shape = body.shape;
     const { angles, r } = shape;
     const n = angles.length;

@@ -1,7 +1,7 @@
 {
   "bodies": [
     {
-      "shape": { "generator": "ellipse", "args": [128, 60, 100] },
+      "shape": { "generator": "circle", "args": [128, 60, 100] },
       "position": [200, -100],
       "velocity": [0, 0],
       "rotation": { "angle": 10, "omega": 0.1 }

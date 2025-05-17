@@ -1,4 +1,4 @@
-import { checkSpokeCollision } from "./shapes/analyze.js";
+import { checkSpokeCollision, radiusAtAngle } from "./shapes/analyze.js";
 
 export class Physics {
     static step(world, dt) {
@@ -76,9 +76,30 @@ export class Physics {
         const relVel = rvx * nx + rvy * ny;
 
         // 3. If separating, don't apply impulse (but DO position correction elsewhere)
-        // if (relVel > 0) retursn;
+        // if (relVel > 0) retursn; //buggy with ovals or rects, works for spheres, may return to/
 
-        // TODO: Handle position correction (optional, separate from this method usually)
+        // Handle position correction
+
+        // compute center-to-center vector and distance
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.hypot(dx, dy);
+
+        // compute collision angles for each shape (world-space)
+        const angleToB = Math.atan2(dy, dx); // from a to b
+
+        // radius along collision normal for each body
+        // You need to supply your radiusAtAngle(shape, angle) function.
+        const rA = radiusAtAngle(a, angleToB - a.angle); // Convert to a's local space if needed
+        const rB = radiusAtAngle(b, angleToB + Math.PI - b.angle); // B's local space
+
+        // 4. Penetration (amount overlapped)
+        const penetration = (rA + rB) - dist;
+
+        // --- POSITION CORRECTION ---
+        if (penetration > 0) {
+            Physics.positionCorrection(a, b, nx, ny, penetration);
+        }
 
         // 5. Impulse magnitude: two cases
         const aMass = a.mass;
@@ -127,5 +148,26 @@ export class Physics {
 
         // Optionally: handle friction, spin, or angular velocity with better surface model
     }
+
+    // Position Correction Step (run for every collision, even if relVel > 0)
+    static positionCorrection(a, b, nx, ny, penetration) {
+        // How much to move each object:
+        const aMass = a.mass || 1; // Avoid division by zero
+        const bMass = b.mass || 1;
+        const totalMass = aMass + bMass;
+        const percent = 0.8; // usually 80% or so to avoid jitter
+        const slop = 0.01; // allow small overlap
+
+        const correction = Math.max(penetration - slop, 0) / totalMass * percent;
+        if (a.mass > 0) {
+            a.x -= nx * correction * bMass;
+            a.y -= ny * correction * bMass;
+        }
+        if (b.mass > 0) {
+            b.x += nx * correction * aMass;
+            b.y += ny * correction * aMass;
+        }
+    }
+
 
 }
