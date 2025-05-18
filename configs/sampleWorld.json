@@ -1,16 +1,16 @@
 {
   "bodies": [
     {
-      "shape": { "generator": "circle", "args": [128, 60, 100] },
+      "shape": { "generator": "circle", "args": [64, 60, 100] },
       "position": [200, -100],
       "velocity": [0, 0],
       "rotation": { "angle": 10, "omega": 0.1 }
     },
     {
-      "shape": { "generator": "ellipse", "args": [128, 200, 150] },
+      "shape": { "generator": "ellipse", "args": [64, 201, 150] },
       "position": [300, 200],
       "velocity": [0, 0],
-      "rotation": { "angle": 0, "omega": 1 }
+      "rotation": { "angle": 0, "omega": 0 }
     },
     {
       "shape": { "generator": "hilly", "args": [64, 50, 10, 10] },

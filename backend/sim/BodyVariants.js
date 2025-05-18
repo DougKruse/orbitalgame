@@ -8,6 +8,7 @@ export class Projectile extends Body {
         const fakeVelocity = [0, 0];
         super({ shape, position, fakeVelocity, rotation, mass });
         this.fakeMass = 0.5;
+        this.type = 'proj'
     }
 
     static defaultShape() {

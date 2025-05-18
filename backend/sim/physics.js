@@ -1,9 +1,10 @@
-import { checkSpokeCollision, radiusAtAngle } from "./shapes/analyze.js";
+import { checkSpokeCollision, radiusAtAngle, worldToLocal } from "./shapes/analyze.js";
 
 export class Physics {
     static step(world, dt) {
         this.integrate(world, dt);
         this.handleCollisions(world);
+        world.removeDestroyed();
         // Future: gravity(world, dt), etc.
     }
 
@@ -23,20 +24,107 @@ export class Physics {
         for (let i = 0; i < bodies.length; i++) {
             for (let j = i + 1; j < bodies.length; j++) {
                 const a = bodies[i], b = bodies[j];
+                if (a === b) continue;
                 if (a.ID.startsWith('player') || b.ID.startsWith('player')) continue;
-                if (checkSpokeCollision(a, b)) {
-                    Physics.resolveElasticCollision( a, b, 
-                        {options: {
-                            normalA: a.shape.normals,
-                            normalB: b.shape.normals
-                        }}
-                    );
-                    console.log(`[COLLISION] ${a.ID} ↔ ${b.ID}`);
+                let collide = checkSpokeCollision(a, b);
+                if (collide) {
+
+                    //to make sure collding projs both trigger
+                    let aP = a.type === 'proj';
+                    let bP = b.type === 'proj';
+
+                    // if a is a proj
+                    if ( aP ){
+                        console.log(`[COLLISION] ${a.ID} -> ${b.ID}`);
+                        const localBiteCenter = worldToLocal(b, collide.contactPoint);
+
+                        this.applyCircularBite({
+                            shape: b.shape,
+                            biteCenter: localBiteCenter,
+                            biteRadius: 30  
+                        });
+                        a.destroy();
+                    }
+
+                    // if b is a proj
+                    if ( bP) {
+                        console.log(`[COLLISION] ${a.ID} <- ${b.ID}`);
+                        const localBiteCenter = worldToLocal(a, collide.contactPoint);
+
+                        this.applyCircularBite({
+                            shape: a.shape,
+                            biteCenter: localBiteCenter,
+                            biteRadius: 30
+                        });
+                        b.destroy();
+                    }
+                    // if neither are
+                    if ( !aP && !bP){
+                        console.log(`[COLLISION] ${a.ID} ↔ ${b.ID}`);
+
+                        this.resolveElasticCollision(a, b,
+                            {
+                                options: {
+                                    normalA: a.shape.normals,
+                                    normalB: b.shape.normals
+                                }
+                            }
+                        );
+                        
+                    }
+
                     // Optional: emit bus event, apply damage, etc.
                 }
             }
         }
     }
+
+    static applyCircularBite({shape, biteCenter, biteRadius, shapeCenter = [0, 0]}) {
+        // console.log(shape.angles);
+        const { angles, r } = shape;
+        const n = angles.length;
+        // console.log('BITE RESULT Before', shape.r.slice());
+        // console.log('Bite center in shape frame', biteCenter);
+        // console.log('Distance from center', Math.hypot(biteCenter[0], biteCenter[1]));
+
+        for (let i = 0; i < n; i++) {
+            // Ray: origin shapeCenter, dir (cos θ, sin θ)
+            const θ = angles[i];
+            const dx = Math.cos(θ);
+            const dy = Math.sin(θ);
+
+            // Vector from ray origin to bite center
+            const ox = shapeCenter[0];
+            const oy = shapeCenter[1];
+            const cx = biteCenter[0];
+            const cy = biteCenter[1];
+            const fx = ox - cx;
+            const fy = oy - cy;
+
+            // Ray-circle intersection: solve (fx + t*dx)^2 + (fy + t*dy)^2 = biteRadius^2
+            const a = dx * dx + dy * dy; // always 1, but kept for clarity
+            const b = 2 * (fx * dx + fy * dy);
+            const c = fx * fx + fy * fy - biteRadius * biteRadius;
+            const discriminant = b * b - 4 * a * c;
+
+            if (discriminant < 0) continue; // no intersection
+
+            // Compute both solutions for t
+            const sqrtDisc = Math.sqrt(discriminant);
+            const t1 = (-b - sqrtDisc) / (2 * a);
+            const t2 = (-b + sqrtDisc) / (2 * a);
+
+            // We want the smallest positive t in [0, r[i]]
+            let t = Infinity;
+            if (t1 >= 0 && t1 <= r[i]) t = t1;
+            else if (t2 >= 0 && t2 <= r[i]) t = t2;
+            if (t !== Infinity) {
+                r[i] = t;
+            }
+        }
+        // console.log('BITE RESULT after', shape.r.slice());
+    }
+
 
     static resolveElasticCollision(a, b, options = {}) {
         // options: {

@@ -51,6 +51,8 @@ function computeSpokeNormals(shape) {
     return normals;
 }
 
+
+//todo: figure out whether to incorperate in collision
 function interpolateNormalAtAngle(shape, normals, contactAngle) {
     const { angles } = shape;
     const n = angles.length;
@@ -100,8 +102,38 @@ export function checkSpokeCollision(bodyA, bodyB) {
     // Get B's spoke value toward A (opposite direction)
     const rB = radiusAtAngle(bodyB, angleToB + Math.PI);
 
-    return dist < (rA + rB);
+    const overlap = dist < (rA + rB);
+    if (!overlap) return false;
+
+    // Compute surface points on A and B at contact
+    const pointA = [
+        bodyA.x + Math.cos(angleToB) * rA,
+        bodyA.y + Math.sin(angleToB) * rA,
+    ];
+    const pointB = [
+        bodyB.x + Math.cos(angleToB + Math.PI) * rB,
+        bodyB.y + Math.sin(angleToB + Math.PI) * rB,
+    ];
+    // Midpoint: a reasonable guess for contact point
+    const contactPoint = [
+        (pointA[0] + pointB[0]) / 2,
+        (pointA[1] + pointB[1]) / 2,
+    ];
+
+    // Return full collision info for further processing
+    return {
+        overlap: true,
+        penetration: (rA + rB) - dist,
+        angleToB,
+        contactPoint,
+        pointA,
+        pointB,
+        dist,
+        rA,
+        rB,
+    };
 }
+
 
 export function radiusAtAngle(body, globalAngle) {
     const shape = body.shape;
@@ -140,4 +172,15 @@ export function radiusAtAngle(body, globalAngle) {
     if (t < 0) t += 1; // If localAngle wrapped around
 
     return r0 + t * (r1 - r0);
+}
+
+export function worldToLocal(body, point) {
+    const dx = point[0] - body.x;
+    const dy = point[1] - body.y;
+    const c = Math.cos(-body.angle);
+    const s = Math.sin(-body.angle);
+    return [
+        dx * c - dy * s,
+        dx * s + dy * c
+    ];
 }

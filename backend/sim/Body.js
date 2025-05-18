@@ -13,7 +13,9 @@ export class Body {
         this.angle = angle;
         this.omega = omega;
         this.mass = mass;
-        this.ID  = 'body' + bodyID++; 
+        this.ID  = 'body' + bodyID++;
+        this.type = 'body';
+        this.destroyed = false;
     }
 
     // Optional: derived helpers
@@ -21,6 +23,9 @@ export class Body {
     get velocity() { return [this.vx, this.vy]; }
     get rot() { return { angle: this.angle, omega: this.omega }; }
 
+    destroy(){
+        this.destroyed = true;
+    }
     // Later:
     // applyForce, boundingBox, etc.
 }

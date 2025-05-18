@@ -24,4 +24,8 @@ export class World {
         this.addBody(projectile);
     }
 
+    removeDestroyed(){
+        this.bodies = this.bodies.filter(body => !body.destroyed);
+    }
+
 }
