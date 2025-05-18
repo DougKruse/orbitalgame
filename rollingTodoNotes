@@ -1,0 +1,20 @@
+Collision refinement, already explored theory but need to work on idea that uses adjacents to slope, not step for collision check once basic test is done.
+	First ballpark. Explore best practice, can filter down, understand what is intensive to loop through and quick and whether is better to do lots of filtering or get to more accurate to avoid lots of (quick but) false positives. 
+
+debris from bites, likely multiple chunks over direct large chunk. Need to fly away from object they came from, not back into it, no celings make this easy, easy to get range of shortened angles.
+
+Weapons 
+
+
+Other interesting shapes: 
+	That rounded triangle thing.
+	hypershape construct made of joined shapes? This likely works, just need refinement. Likely special class of body has this.
+
+Source non-symmetric shape ideas that still work ok.
+
+Shapes being able to get their own center seems crutial for non-symmetrical shapes. (only if their rotation is to be adjusted, which seems a mixed bag, too complicated for good gamesmanship, too complicated if when your planet gets half destroyed your spinning changes immensely or gravity, more likely that just treat as before in this case.
+Non symmetrical shapes in general seem like interesting idea for livening up space considering limits on aspect ratio. Like ones that are initially created unsymmetrical.
+
+
+	
+
