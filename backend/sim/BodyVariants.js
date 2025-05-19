@@ -12,7 +12,7 @@ export class Projectile extends Body {
     }
 
     static defaultShape() {
-        return gen.makeCircle(16, 5);
+        return gen.makeCircle(8, 5);
     }
     impulse(intensity = 0, angleOverride) {
         const angle = angleOverride ?? this.angle;

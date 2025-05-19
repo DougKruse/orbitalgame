@@ -89,7 +89,8 @@ function interpolateNormalAtAngle(shape, normals, contactAngle) {
 }
 
 
-
+// Basic check, will false posive for convex shapes and step
+// Note will fail for peaks (use new objects for extrusions)
 export function checkSpokeCollision(bodyA, bodyB) {
     const dx = bodyB.x - bodyA.x;
     const dy = bodyB.y - bodyA.y;
@@ -105,33 +106,95 @@ export function checkSpokeCollision(bodyA, bodyB) {
     const overlap = dist < (rA + rB);
     if (!overlap) return false;
 
-    // Compute surface points on A and B at contact
-    const pointA = [
-        bodyA.x + Math.cos(angleToB) * rA,
-        bodyA.y + Math.sin(angleToB) * rA,
-    ];
-    const pointB = [
-        bodyB.x + Math.cos(angleToB + Math.PI) * rB,
-        bodyB.y + Math.sin(angleToB + Math.PI) * rB,
-    ];
-    // Midpoint: a reasonable guess for contact point
-    const contactPoint = [
-        (pointA[0] + pointB[0]) / 2,
-        (pointA[1] + pointB[1]) / 2,
-    ];
+    // do a more extensive neighbor check
+    return checkSpokeCollisionExpanded(bodyA, bodyB, 3);
+}
 
-    // Return full collision info for further processing
-    return {
-        overlap: true,
-        penetration: (rA + rB) - dist,
-        angleToB,
-        contactPoint,
-        pointA,
-        pointB,
-        dist,
-        rA,
-        rB,
-    };
+// More refined neighbor segment check
+function checkSpokeCollisionExpanded(bodyA, bodyB, n = 1) {
+    // center-to-center vector
+    const dx = bodyB.x - bodyA.x;
+    const dy = bodyB.y - bodyA.y;
+    const angleToB = Math.atan2(dy, dx);
+
+    const spokeCountA = bodyA.shape.angles.length;
+    const idxA = getClosestSpokeIndex(bodyA.shape.angles, angleToB - bodyA.angle);
+    const indicesA = getNeighborIndices(idxA, spokeCountA, n);
+    const pointsA = getPointsAtIndices(bodyA, indicesA);
+
+    const spokeCountB = bodyB.shape.angles.length;
+    const idxB = getClosestSpokeIndex(bodyB.shape.angles, angleToB + Math.PI - bodyB.angle);
+    const indicesB = getNeighborIndices(idxB, spokeCountB, n);
+    const pointsB = getPointsAtIndices(bodyB, indicesB);
+
+    // Find segement intersection
+    for (let i = 0; i < pointsA.length - 1; i++) {
+        for (let j = 0; j < pointsB.length - 1; j++) {
+            const inter = segmentsIntersect(
+                pointsA[i], pointsA[i + 1],
+                pointsB[j], pointsB[j + 1]
+            );
+            if (inter) {
+                // Found a collision at inter
+                return {
+                    overlap: true,
+                    contactPoint: inter
+                    // if needed...
+                };
+            }
+        }
+    }
+
+    return false;
+}
+
+// Helper: Generate array of neighbor indices centered on idx
+function getNeighborIndices(idx, spokeCount, n = 1) {
+    const indices = [];
+    for (let offset = -n; offset <= n; offset++) {
+        indices.push((idx + offset + spokeCount) % spokeCount);
+    }
+    return indices;
+}
+
+// Helper: Convert indices to world-space points for a body
+function getPointsAtIndices(body, indices) {
+    const points = [];
+    const angles = body.shape.angles;
+    const rArr = body.shape.r;
+    const rot = body.angle;
+    const cx = body.x, cy = body.y;
+    for (const i of indices) {
+        const theta = angles[i] + rot;
+        const r = rArr[i];
+        points.push([
+            cx + Math.cos(theta) * r,
+            cy + Math.sin(theta) * r
+        ]);
+    }
+    return points;
+}
+
+function segmentsIntersect(p1, p2, q1, q2) {
+    // Returns intersection point or null
+    // Uses vector cross products
+    const s1_x = p2[0] - p1[0], s1_y = p2[1] - p1[1];
+    const s2_x = q2[0] - q1[0], s2_y = q2[1] - q1[1];
+
+    const denom = (-s2_x * s1_y + s1_x * s2_y);
+    if (denom === 0) return null; // parallel
+
+    const s = (-s1_y * (p1[0] - q1[0]) + s1_x * (p1[1] - q1[1])) / denom;
+    const t = (s2_x * (p1[1] - q1[1]) - s2_y * (p1[0] - q1[0])) / denom;
+
+    if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+        // Intersection point
+        return [
+            p1[0] + (t * s1_x),
+            p1[1] + (t * s1_y)
+        ];
+    }
+    return null; // No intersection
 }
 
 
@@ -173,6 +236,28 @@ export function radiusAtAngle(body, globalAngle) {
 
     return r0 + t * (r1 - r0);
 }
+
+function getClosestSpokeIndex(angles, theta) {
+    // Normalize theta to [0, 2π)
+    const TWO_PI = Math.PI * 2;
+    let normTheta = theta % TWO_PI;
+    if (normTheta < 0) normTheta += TWO_PI;
+
+    // Find index with minimal angular distance to normTheta
+    let minDelta = Infinity;
+    let minIdx = 0;
+    for (let i = 0; i < angles.length; i++) {
+        // Assuming angles[i] are already [0, 2π)
+        let delta = Math.abs(angles[i] - normTheta);
+        if (delta > Math.PI) delta = TWO_PI - delta; // wraparound
+        if (delta < minDelta) {
+            minDelta = delta;
+            minIdx = i;
+        }
+    }
+    return minIdx;
+}
+
 
 export function worldToLocal(body, point) {
     const dx = point[0] - body.x;
