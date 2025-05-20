@@ -3,7 +3,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { bus } from './eventBus.js';
 import chokidar from 'chokidar';
-import { loadConfig } from '../sim/configLoader.js';
+import { loadWorldConfig } from '../sim/configLoader.js';
 import { SimLoop } from '../sim/tick.js';
 import { setupSocket } from './socket.js';
 import { setupController } from '../sim/controller.js';
@@ -19,7 +19,7 @@ export function startServer() {
     const httpServer = createServer(app);
     setupSocket(httpServer);
 
-    let world = loadConfig(CONFIG);
+    let world = loadWorldConfig(CONFIG);
     bus.emit('state', world);
 
     const sim = new SimLoop(world);
@@ -43,7 +43,7 @@ export function startServer() {
             if (event === 'change') {
                 console.log(`  → reloading ${file}`);
                 try {
-                    const newW = loadConfig(CONFIG);
+                    const newW = loadWorldConfig(CONFIG);
                     sim.setWorld(newW);
                     // immediate emit if you want an instant update:
                     // bus.emit('state', newW);

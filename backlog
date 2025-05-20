@@ -5,3 +5,7 @@ gravity (Not strictly pure realism, more functional and expected. Scales and mas
 Start testing system ideas
 start testing weapon ideas
 start making race ideas
+Frontend visuals
+Things being destroyed needs to convey how much was, not poof
+
+Collision refinement, Numer of neghbors becomes issue when collision is on unexpected (eg. a shape rotates in to to back of a projectile. Hills and valleys for larger objects) arcs. Rarely causes buggy behavior, keep eye on.

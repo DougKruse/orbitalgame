@@ -1,9 +1,25 @@
-Collision refinement, already explored theory but need to work on idea that uses adjacents to slope, not step for collision check once basic test is done.
-	First ballpark. Explore best practice, can filter down, understand what is intensive to loop through and quick and whether is better to do lots of filtering or get to more accurate to avoid lots of (quick but) false positives. 
+Gravity, elastic to defnine stable orbits. Hierarchy, supersceding by mass. Metric of how close an object is to "snapping" to orbit, doing so (loosely, avoiding perfect, wiggling slightly, false). Thus assuming you are at perfect orbit, it takes designated cetain amount of force to malign or change. This is good, so it can be done but not trivially. Same with planet / star to star / galaxy.
+We are *really* going to have to cheat at this, for sizes and masses. Likely manifest loose rings for map generation where things of similar polar raius from center have similar rotation speeds.
+
+Assign random attractor value, iterate to 10, flag check at 10.
+
+
+	affectsGravity (boolean): participates in gravity as attractor (true for stars, planets, black hole, not for projectiles/debris)
+
+	isCollidable (boolean): can be hit (true for all except, e.g., forcefield-only objects)
+
+	canBeMoved (boolean): can be moved by force events / collision (projectiles: false; planets: yes, but threashold, stars / holes no.) Perhaps have "order" value in terms of what it can effect, perhaps function of strength. Need to figure out mass effect on this force anyway, so that small objects are more effected (but dont go to ludicrious speeds given smaller space of domain).
+
+Orbit and rotation speed slower for each increase in scale. (E.G. planet around sun every 5 rounds, sun around universe every 20, etc.
+
 
 debris from bites, likely multiple chunks over direct large chunk. Need to fly away from object they came from, not back into it, no celings make this easy, easy to get range of shortened angles.
 
-Weapons 
+Weapons
+	Explosions causing some force, equal and opposite to debris
+	Spawn a thing
+	Basic npc
+	Items rotating with body they are on,  moving with it, tied to it unless something happens.
 
 
 Other interesting shapes: 
