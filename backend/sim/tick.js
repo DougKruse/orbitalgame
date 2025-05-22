@@ -35,7 +35,7 @@ export class SimLoop {
     }
 
     _step() {
-        Physics.step(this.world, this.dt);
+        this.world.step(this.dt);
         bus.emit('state', this.world);
     }
 };

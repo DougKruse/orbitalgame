@@ -269,3 +269,50 @@ export function worldToLocal(body, point) {
         dx * s + dy * c
     ];
 }
+
+
+export function applyCircularBite({ shape, biteCenter, biteRadius, shapeCenter =[0, 0] }) {
+    // console.log(shape.angles);
+    const { angles, r } = shape;
+    const n = angles.length;
+    // console.log('BITE RESULT Before', shape.r.slice());
+    // console.log('Bite center in shape frame', biteCenter);
+    // console.log('Distance from center', Math.hypot(biteCenter[0], biteCenter[1]));
+
+    for (let i = 0; i < n; i++) {
+        // Ray: origin shapeCenter, dir (cos θ, sin θ)
+        const θ = angles[i];
+        const dx = Math.cos(θ);
+        const dy = Math.sin(θ);
+
+        // Vector from ray origin to bite center
+        const ox = shapeCenter[0];
+        const oy = shapeCenter[1];
+        const cx = biteCenter[0];
+        const cy = biteCenter[1];
+        const fx = ox - cx;
+        const fy = oy - cy;
+
+        // Ray-circle intersection: solve (fx + t*dx)^2 + (fy + t*dy)^2 = biteRadius^2
+        const a = dx * dx + dy * dy; // always 1, but kept for clarity
+        const b = 2 * (fx * dx + fy * dy);
+        const c = fx * fx + fy * fy - biteRadius * biteRadius;
+        const discriminant = b * b - 4 * a * c;
+
+        if (discriminant < 0) continue; // no intersection
+
+        // Compute both solutions for t
+        const sqrtDisc = Math.sqrt(discriminant);
+        const t1 = (-b - sqrtDisc) / (2 * a);
+        const t2 = (-b + sqrtDisc) / (2 * a);
+
+        // We want the smallest positive t in [0, r[i]]
+        let t = Infinity;
+        if (t1 >= 0 && t1 <= r[i]) t = t1;
+        else if (t2 >= 0 && t2 <= r[i]) t = t2;
+        if (t !== Infinity) {
+            r[i] = t;
+        }
+    }
+    // console.log('BITE RESULT after', shape.r.slice());
+}

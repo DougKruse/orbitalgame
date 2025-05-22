@@ -1,4 +1,7 @@
 import { Projectile } from "./BodyVariants.js";
+import { Physics } from "./physics.js";
+import { Gravity } from "./Gravity.js";
+import { CollisionHandler } from "./CollisionHandler.js";
 export class World {
     constructor() {
         this.time = 0;
@@ -27,5 +30,10 @@ export class World {
     removeDestroyed(){
         this.bodies = this.bodies.filter(body => !body.destroyed);
     }
-
+    
+    step(dt, frame) {
+        Physics.integrate(this.bodies, dt);
+        CollisionHandler.handleCollisions(this);
+        this.removeDestroyed();
+    }
 }
