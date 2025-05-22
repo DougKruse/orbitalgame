@@ -48,7 +48,7 @@ export class CollisionHandler {
                     if ( !aP && !bP){
                         console.log(`[COLLISION] ${a.ID} ↔ ${b.ID}`);
 
-                        PhysshapeToolsics.resolveElasticCollision(a, b,
+                        shapeTools.resolveElasticCollision(a, b,
                             {
                                 options: {
                                     normalA: a.shape.normals,
