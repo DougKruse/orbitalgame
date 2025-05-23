@@ -1,6 +1,6 @@
 let bodyID = 0;
 export class Body {
-    constructor({ shape, position, velocity, rotation, mass }) {
+    constructor({ shape, position, velocity, rotation, mass , type, density }) {
         this.shape = shape;
         const [x, y] = position || [0, 0];
         const [vx, vy] = velocity || [0, 0];
@@ -14,7 +14,7 @@ export class Body {
         this.omega = omega;
         this.mass = mass;
         this.ID  = 'body' + bodyID++;
-        this.type = 'body';
+        this.type = type ?? 'body';
         this.destroyed = false;
     }
 

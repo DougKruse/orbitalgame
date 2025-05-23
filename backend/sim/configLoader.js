@@ -13,10 +13,6 @@ export function loadWorldConfig(json) {
         const body = createBody(b);
         world.addBody(body);
 
-        // Maintain attractor lists 
-        if (body.type === 'planet') world.planets.push(body);
-        if (body.type === 'star') world.stars.push(body);
-        if (body.type === 'blackhole') world.blackHoles.push(body);
     }
 
     // playerObjects
@@ -53,6 +49,7 @@ function createBody(b) {
     }
     const shape = factory(...args);
 
+    console.log(b.type);
     const type = b.type ?? "body";
     const density = b.density ?? DEFAULT_DENSITY[type] ?? DEFAULT_DENSITY["body"];
     const mass = b.mass ?? (shape.areaApprox && density ? shape.areaApprox * density : 0);

@@ -26,6 +26,7 @@ export function setupSocket(server) {
             type: 'STATE_UPDATE',
             payload: convertStateForJSON(state),
         };
+        // console.log(message);
         const msgString = JSON.stringify(message);
         for (const ws of clients) {
             if (ws.readyState === 1) ws.send(msgString);
@@ -53,15 +54,21 @@ function convertShapeForJSON(shape) {
 }
 
 function convertBodyForJSON(body) {
-    return {
-        ...body,
-        shape: convertShapeForJSON(body.shape)
-    };
+    // Make a shallow copy without .attractors or any other problematic fields
+    const { attractors, parent, ...serializable } = body;
+
+    // If you need to send parent, use just an ID (not the object)
+    // if (body.parent) serializable.parentID = body.parent.ID;
+    // serializable.attractorIDs = body.attractors?.map(a => a.ID);
+
+    serializable.shape = convertShapeForJSON(body.shape);
+    return serializable;
 }
+
 
 function convertStateForJSON(state) {
     return {
-        ...state,
+        time: state.time,
         bodies: state.bodies.map(convertBodyForJSON)
     };
 }

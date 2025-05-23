@@ -2,6 +2,7 @@ import { checkSpokeCollision, radiusAtAngle, worldToLocal, applyCircularBite } f
 
 export class Physics {
 
+    //Applies current speeds to movement
     static integrate(bodies, dt) {
         for (const b of bodies) {
             b.x += b.vx * dt;
