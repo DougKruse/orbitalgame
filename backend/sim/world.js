@@ -52,9 +52,9 @@ export class World {
     }
     
     step(dt, frame) {
-        Physics.integrate(this.bodies, dt);
         CollisionHandler.handleCollisions(this);
-        Gravity.updateGravity(this, dt);
+        Gravity.updateGravity(this, dt, frame);
         this.removeDestroyed();
+        Physics.integrate(this.bodies, dt);
     }
 }

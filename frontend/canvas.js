@@ -14,6 +14,11 @@ let clientWorld = null;
 export let isPausedLocally = false;
 let isPausedServer = false;
 
+let showSpokes = false;              // Controls spoke visibility
+let selectedBodyID = null;           // Stores ID of selected body
+const trails = {};                   // Keyed by body.ID: Array of [x, y]
+
+
 connect();
 
 registerMouseControl(canvas);
@@ -22,6 +27,9 @@ function findPlayer( world ){
     return world.bodies.find(b => b.ID === playerState.targetID);
 }
 
+document.getElementById('toggleSpokesBtn').addEventListener('click', () => {
+    showSpokes = !showSpokes;
+});
 
 document.getElementById('pauseBtn').addEventListener('click', () => {
     isPausedLocally = !isPausedLocally;
@@ -81,14 +89,43 @@ clientBus.on('STATE_UPDATE', (payload) => {
     clientWorld = structuredClone(payload);
 });
 
+canvas.addEventListener('click', function (evt) {
+    const rect = canvas.getBoundingClientRect();
+    // Mouse in world coords (centered at cx, cy)
+    const mx = evt.clientX - rect.left - cx;
+    const my = evt.clientY - rect.top - cy;
+
+    let found = null;
+    // Check bodies from last to first so topmost is found if overlapping
+    const bodies = (clientWorld || world).bodies;
+    for (let i = bodies.length - 1; i >= 0; i--) {
+        const b = bodies[i];
+        // Use max radius for hit area
+        const visualRadius = b.r || (b.shape && Math.max(...b.shape.r));
+        if (Math.hypot(mx - b.x, my - b.y) < visualRadius) {
+            found = b;
+            break; // Take topmost
+        }
+    }
+    console.log("Clicked body:", found ? found.ID : "none");
+    if (found) {
+        if (selectedBodyID === found.ID) {
+            selectedBodyID = null; // Deselect
+        } else {
+            selectedBodyID = found.ID;
+            if (!trails[selectedBodyID]) trails[selectedBodyID] = [];
+        }
+    }
+});
+
 
 
 let sanitylimit = 0;
 
 
-function drawBody(ctx, body) {
-    if ( sanitylimit < 6 ){
-        console.log(body);
+function drawBody(ctx, body, isSelected) {
+    if ( sanitylimit < 15 ){
+        // console.log(body);
         sanitylimit++;
     }
 
@@ -96,17 +133,19 @@ function drawBody(ctx, body) {
     const spokeCount = angles.length;
 
     // === Draw spokes in light green ===
-    ctx.beginPath();
-    ctx.strokeStyle = 'lightgreen';
-    for (let i = 0; i < spokeCount; i++) {
-        const θ = angles[i] + body.angle;
-        const dist = r[i];
-        const px = body.x + Math.cos(θ) * dist;
-        const py = body.y + Math.sin(θ) * dist;
-        ctx.moveTo(body.x, body.y);
-        ctx.lineTo(px, py);
+    if (showSpokes) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'lightgreen';
+        for (let i = 0; i < spokeCount; i++) {
+            const θ = angles[i] + body.angle;
+            const dist = r[i];
+            const px = body.x + Math.cos(θ) * dist;
+            const py = body.y + Math.sin(θ) * dist;
+            ctx.moveTo(body.x, body.y);
+            ctx.lineTo(px, py);
+        }
+        ctx.stroke();
     }
-    ctx.stroke();
 
     // === Draw body outline in black ===
     ctx.beginPath();
@@ -121,6 +160,17 @@ function drawBody(ctx, body) {
     }
     ctx.closePath();
     ctx.stroke();
+    ctx.lineWidth = 1;
+
+    // === Draw body type label centered ===
+    ctx.save();
+    ctx.font = isSelected ? "bold 16px sans-serif" : "14px sans-serif";
+    ctx.fillStyle = isSelected ? "orange" : "black";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    // Use body.type if available, else fallback to ID
+    ctx.fillText(body.type || body.ID, body.x, body.y);
+    ctx.restore();
 }
 
 function draw() {
@@ -141,17 +191,69 @@ function draw() {
     const activeWorld = clientWorld || world;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+    // Update trails for selected
+    if (selectedBodyID) {
+        const body = activeWorld.bodies.find(b => b.ID === selectedBodyID);
+        if (body) {
+            // Push new position, only if changed
+            let trail = trails[selectedBodyID];
+            const last = trail[trail.length - 1];
+            if (!last || last[0] !== body.x || last[1] !== body.y) {
+                trail.push([body.x, body.y]);
+                // Keep trail short enough for performance
+                // if (trail.length > 500) trail.shift();
+            }
+        }
+    }
+
+    // Draw filled bodies (for click area)
     for (const b of activeWorld.bodies) {
         ctx.beginPath();
         ctx.arc(cx + b.x, cy + b.y, b.r, 0, 2 * Math.PI);
+        ctx.fillStyle = '#ddd'; // or some other
+        ctx.globalAlpha = 0.6;
         ctx.fill();
+        ctx.globalAlpha = 1.0;
     }
+
+    // Draw trails (behind the shapes)
+    if (selectedBodyID && trails[selectedBodyID]) {
+        ctx.save();
+        ctx.strokeStyle = "orange";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        let t = trails[selectedBodyID];
+        if (t.length) {
+            ctx.moveTo(cx + t[0][0], cy + t[0][1]);
+            for (let i = 1; i < t.length; i++) {
+                ctx.lineTo(cx + t[i][0], cy + t[i][1]);
+            }
+        }
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    // Draw bodies (with outlines, spokes, text)
     for (const b of activeWorld.bodies) {
         ctx.save();
         ctx.translate(cx, cy); // center camera
-        drawBody(ctx, b);
+        drawBody(ctx, b, selectedBodyID === b.ID);
         ctx.restore();
     }
+
+    // for (const b of activeWorld.bodies) {
+    //     ctx.beginPath();
+    //     ctx.arc(cx + b.x, cy + b.y, b.r, 0, 2 * Math.PI);
+    //     ctx.fill();
+    // }
+    // for (const b of activeWorld.bodies) {
+    //     ctx.save();
+    //     ctx.translate(cx, cy); // center camera
+    //     drawBody(ctx, b);
+    //     ctx.restore();
+    // }
 }
 
 draw();

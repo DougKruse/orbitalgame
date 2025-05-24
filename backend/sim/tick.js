@@ -8,6 +8,7 @@ export class SimLoop {
         this.world = world;
         this.dt = dt;
         this.timerId = null;
+        this.frame = 0;
     }
 
     start() {
@@ -35,7 +36,8 @@ export class SimLoop {
     }
 
     _step() {
-        this.world.step(this.dt);
+        this.world.step(this.dt, this.frame);
         bus.emit('state', this.world);
+        this.frame++;
     }
 };

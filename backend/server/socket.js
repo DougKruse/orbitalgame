@@ -55,7 +55,8 @@ function convertShapeForJSON(shape) {
 
 function convertBodyForJSON(body) {
     // Make a shallow copy without .attractors or any other problematic fields
-    const { attractors, parent, ...serializable } = body;
+    const { attractors, parent, normals, ...serializable } = body;
+    // console.log(serializable);
 
     // If you need to send parent, use just an ID (not the object)
     // if (body.parent) serializable.parentID = body.parent.ID;

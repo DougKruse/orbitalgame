@@ -1,47 +1,59 @@
 // physics/GravitySystem.js
 export class Gravity {
+    
+    static GRAVITY_CONSTANT = 1;
+    static TYPE_RANK = {
+        'projectile': 0,
+        'debris': 0,
+        'planet': 1,
+        'star': 2,
+        'blackhole': 3,
+        // Add more as needed
+    };
 
-    static updateGravity(world, dt) { 
+
+    static updateGravity(world, dt, frame) { 
         const bodies = world.bodies;
+
         for (const body of bodies) {
-
+ 
             this.updateAttractors(body, world)
-
 
             // Apply Gravity forces of attractors
             let fx = 0, fy = 0;
             for (const attractor of body.attractors) {
-                const [gx, gy] = this.blendedGravity(body, attractor);
+                let gravValue = this.blendedGravity(body, attractor, frame);
+
+                const [gx, gy] = gravValue;
+                // const [gx, gy] = this.blendedGravity(body, attractor);
                 fx += gx; fy += gy;
             }
 
             ///Snap to elastic orbit if only one attractor dominates
-            if (body.attractors) {
-                // this.applyElasticOrbit(body, body.attractors[0], dt);
+            // TODO: Find if dominant
+            const mainAttractor = body.attractors?.[0];
+            if (mainAttractor) {
+                Gravity.applyElasticOrbit(body, mainAttractor, dt);
             }
 
 
             // Update velocity/position
-            const mass = body.gravityMass || 1; // Always nonzero for math
+            const mass = body.mass || 1; // Always nonzero for math
             body.vx += fx / mass * dt;
             body.vy += fy / mass * dt;
-            // console.log(fy);
-            // body.x += body.vx * dt;
-            // body.y += body.vy * dt;
-
-
 
             // Inherit parent velocity for rendering/world movement
             if (body.parent) {
-                const [pvx, pvy] = getWorldVelocity(body);
+                const [pvx, pvy] = this.getWorldVelocity(body.parent);
                 body.vx += pvx; body.vy += pvy;
             }
         }
-     }
+    }
 
     static updateAttractors(body, world) {
         const candidates = this.findNearbyAttractors(body, world);
         body.attractors = candidates;
+        body.parent = candidates[0];
     }
 
     static findNearbyAttractors(body, world) {
@@ -50,6 +62,9 @@ export class Gravity {
         const MAX_ATTRACTOR_DIST = 2e5;    // only consider within this range (arbitrary, tune as needed)
         const MIN_ATTRACTOR_MASS = 1;      // ignore tiny masses
         const ALWAYS_INCLUDE_TYPES = ['none']; // always include these, even if far
+
+
+        const selfRank = this.TYPE_RANK[body.type] ?? 0;
 
         // Gather all potential attractors from world lists (or fallback to filtering world.bodies)
         let candidates = [];
@@ -62,12 +77,13 @@ export class Gravity {
             candidates = world.bodies.filter(b =>
                 ['planet', 'star', 'blackhole'].includes(b.type)
             );
-            // console.log(world.bodies)
         }
 
         // Remove self and any bodies too small or unphysical
         candidates = candidates.filter(a =>
-            a !== body && (a.mass || 0) >= MIN_ATTRACTOR_MASS
+            a !== body && 
+            (a.mass || 0) >= MIN_ATTRACTOR_MASS && 
+            (this.TYPE_RANK[a.type] ?? 0) >= selfRank
         );
 
         // Compute distances and filter
@@ -80,7 +96,7 @@ export class Gravity {
                 attractor: a,
                 dist,
                 isAlways,
-                hill: (a.parent) ? getHillRadius(a, a.parent) : Infinity, // or 0 if no parent
+                hill: (a.parent) ? this.getHillRadius(a, a.parent) : Infinity, // or 0 if no parent
             };
         });
 
@@ -136,9 +152,12 @@ export class Gravity {
         // Universal gravitation: F = G * m1 * m2 / r^2
         // This returns the force vector [fx, fy] to be applied to body
 
-        const G = 1; // Magic constant
+        const G = this.GRAVITY_CONSTANT; // Magic constant
 
-        if (!body || !attractor || body === attractor) return [0, 0];
+
+        if (!body || !attractor || body === attractor){
+            return [0, 0];
+        } 
 
         // Use gravityMass for calculation if available, otherwise fall back to mass
         const m1 = body.mass ?? 1;
@@ -151,8 +170,10 @@ export class Gravity {
         const r = Math.sqrt(r2);
 
         // Avoid division by zero or extremely strong forces at close range
-        const minDist = 1e-3; // Set this higher for "softer" close encounters
-        if (r < minDist) return [0, 0];
+        const minDist = 1; // Set this higher for "softer" close encounters
+        if (r < minDist){
+            return [0, 0];
+        } 
 
         // Magnitude of force
         const F = G * m1 * m2 / r2;
@@ -160,61 +181,123 @@ export class Gravity {
         // Normalize direction
         const fx = F * (dx / r);
         const fy = F * (dy / r);
+        
 
         return [fx, fy];
 
     }
 
-    static blendedGravity(body,attractor) {
+    static blendedGravity(body,attractor, frame) {
         if (!body.parent) return [0, 0];
-        const d = distance(body, attractor);
-        const rHill = getHillRadius(attractor, attractor.parent);
+        const d = this.distance(body, attractor);
+        const rHill = this.getHillRadius(attractor, attractor.parent);
 
         if (d < 0.8 * rHill) {
             // Fully parent gravity
-            return gravityForce(body, attractor);
+            return this.gravityForce(body, attractor);
         } else if (d < 1.2 * rHill && attractor.parent) {
             // Blend forces
             let blend = (d - 0.8 * rHill) / (0.4 * rHill);
             blend = Math.max(0, Math.min(1, blend));
-            const f1 = gravityForce(body, attractor);
-            const f2 = gravityForce(body, attractor.parent);
+            const f1 = this.gravityForce(body, attractor);
+            const f2 = this.gravityForce(body, attractor.parent);
             return [
                 f1[0] * (1 - blend) + f2[0] * blend,
                 f1[1] * (1 - blend) + f2[1] * blend
             ];
-        } else if (body.parent.parent) {
+        } else if (attractor.parent) {
             // Dominated by higher attractor
-            return gravityForce(body, attractor.parent);
+            return this.gravityForce(body, attractor.parent);
         }
-        return gravityForce(body, body.parent);
+        return this.gravityForce(body, attractor);
     }
-    static applyElasticOrbit(body, dt) {
-        if (!body.parent) return;
-        const dx = body.x - body.parent.x;
-        const dy = body.y - body.parent.y;
+
+    // static applyElasticOrbit(body, attractor, dt) {
+    //     // Only apply if attractor exists and has mass
+    //     if (!attractor || !(attractor.mass > 0)) return;
+
+    //     const G = this.GRAVITY_CONSTANT;
+    //     const SMALL_BLEND = 0;        // 0.2
+    //     const SMALL_ELASTICITY = 0;   // 0.5
+
+    //     // Vector from attractor to body
+    //     const dx = body.x - attractor.x;
+    //     const dy = body.y - attractor.y;
+    //     const r = Math.hypot(dx, dy);
+    //     if (r === 0 || !isFinite(r)) return;
+
+    //     // Relative velocity
+    //     const vx = body.vx - (attractor.vx || 0);
+    //     const vy = body.vy - (attractor.vy || 0);
+
+    //     // Radial/tangential vectors
+    //     const ux = dx / r, uy = dy / r;
+    //     const vRadial = vx * ux + vy * uy;
+    //     const vTangential = vx * -uy + vy * ux;
+
+    //     // Ideal velocity
+    //     const vIdeal = Math.sqrt(G * attractor.mass / r);
+
+    //     // Test: only apply if |vRadial| < 0.5 * vIdeal and |vTangential| ≈ vIdeal
+    //     if (Math.abs(vRadial) < 0.5 * vIdeal && Math.abs(vTangential - vIdeal) < 0.2 * vIdeal) {
+    //         // Gently damp radial velocity
+    //         body.vx -= ux * vRadial * SMALL_ELASTICITY * dt;
+    //         body.vy -= uy * vRadial * SMALL_ELASTICITY * dt;
+
+    //         // Gently nudge tangential velocity toward ideal
+    //         const tangentialCorrection = SMALL_BLEND * (vIdeal - vTangential);
+    //         body.vx += -uy * tangentialCorrection;
+    //         body.vy += ux * tangentialCorrection;
+    //     }
+    // }
+
+    static applyElasticOrbit(body, attractor, dt) {
+        if (!attractor || !(attractor.mass > 0)) return;
+
+        const G = this.GRAVITY_CONSTANT || 1;
+        const RADIAL_DAMP = 0.2;  // how hard to kill off radial motion
+
+        const dx = body.x - attractor.x;
+        const dy = body.y - attractor.y;
         const r = Math.hypot(dx, dy);
-        const r0 = body.targetOrbitRadius;
-        const v0 = body.targetOrbitSpeed;
-        const k = body.elasticity || DEFAULT_ORBIT_ELASTICITY;
+        if (r === 0 || !isFinite(r)) return;
 
-        // Snap to ideal radius
+        // Direction from attractor to body
         const ux = dx / r, uy = dy / r;
-        body.vx -= ux * (r - r0) * k * dt;
-        body.vy -= uy * (r - r0) * k * dt;
 
-        // Snap to ideal tangential velocity
-        const idealVx = v0 * -uy, idealVy = v0 * ux;
-        const blend = ORBIT_TANGENT_BLEND;
-        body.vx = body.vx * (1 - blend) + idealVx * blend;
-        body.vy = body.vy * (1 - blend) + idealVy * blend;
+        // Relative velocity
+        const vx = body.vx - (attractor.vx || 0);
+        const vy = body.vy - (attractor.vy || 0);
+
+        // Decompose
+        const vRadial = vx * ux + vy * uy;
+
+        // Only damp *radial* motion: kill off ellipse, keep energy in tangential
+        body.vx -= ux * vRadial * RADIAL_DAMP * dt;
+        body.vy -= uy * vRadial * RADIAL_DAMP * dt;
     }
 
-    static getWorldVelocity(body) {
+
+
+
+
+    static getWorldVelocity(body, visited = new Set()) {
+        // Set to prevent infinite recursion if two bodies are each other's parents
+        if (!body || visited.has(body)) return [body.vx, body.vy];
+        visited.add(body);
         if (!body.parent) return [body.vx, body.vy];
-        const [pvx, pvy] = getWorldVelocity(body.parent);
+        const [pvx, pvy] = this.getWorldVelocity(body.parent, visited);
         return [body.vx + pvx, body.vy + pvy];
     }
+
+
+    static distance(a, b) {
+        if (!a || !b) return 0;
+        const dx = (a.x ?? a[0]) - (b.x ?? b[0]);
+        const dy = (a.y ?? a[1]) - (b.y ?? b[1]);
+        return Math.hypot(dx, dy);
+    }
+
 
 
 }

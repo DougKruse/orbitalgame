@@ -34,8 +34,8 @@ const DEFAULT_DENSITY = {
     "planet": 1,         // reference, e.g. Earth-like
     "asteroid": 0.3,     // less dense
     "debris": 0.1,       // very light
-    "star": 20,          // superdense for play, since stars are visually small here
-    "blackhole": 500,    // arbitrarily massive for domination
+    "star": 1000,          // superdense for play, since stars are visually small here
+    "blackhole": 10000,    // arbitrarily massive for domination
     "player": 0.5,       // lighter than planet but heavier than debris
     "body": 1            // fallback
 };
@@ -49,7 +49,7 @@ function createBody(b) {
     }
     const shape = factory(...args);
 
-    console.log(b.type);
+    // console.log(b.type);
     const type = b.type ?? "body";
     const density = b.density ?? DEFAULT_DENSITY[type] ?? DEFAULT_DENSITY["body"];
     const mass = b.mass ?? (shape.areaApprox && density ? shape.areaApprox * density : 0);
