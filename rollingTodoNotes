@@ -1,5 +1,16 @@
-Gravity, elastic to defnine stable orbits. Hierarchy, supersceding by mass. Metric of how close an object is to "snapping" to orbit, doing so (loosely, avoiding perfect, wiggling slightly, false). Thus assuming you are at perfect orbit, it takes designated cetain amount of force to malign or change. This is good, so it can be done but not trivially. Same with planet / star to star / galaxy.
-We are *really* going to have to cheat at this, for sizes and masses. Likely manifest loose rings for map generation where things of similar polar raius from center have similar rotation speeds.
+Canvas changes
+	Moveable camera, scaleable zoom, translation between screen area and real area methods for ease and future. 
+	Trails every  x frames for each object, switching between visualizes. Cap amount is high.
+
+Gravity changes
+	Not affecting players, flags below.
+	bind player to planet, spin, movement, adhere to surface.
+	Test larger systems, holes, multiple suns
+	Figure out how much empty space is needed for gravity to function
+	Adjust gravity values as needed for whitespace.
+	Figure how much speed is needed to escape stable orbit
+		Apply at vector perpendicular to orbit for honest amount
+		Good test for more advanced weapon system
 
 Assign random attractor value, iterate to 10, flag check at 10.
 
