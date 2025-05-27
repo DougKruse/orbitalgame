@@ -1,5 +1,9 @@
 import * as at from "../shared/angleTools.js";
 import { isPausedLocally } from "./canvas.js";
+import { clientBus } from './clientBus.js';
+import { playerState } from './playerController.js';
+import { findPlayer } from './playerController.js';
+import { uiState } from './state.js';
 
 export const playerState = {
     targetID: null,  // e.g. id or index of body
@@ -49,4 +53,19 @@ export function updatePlayerControl(world) {
 
     const rotateSpeed = 0.3; // higher is snappier
     body.omega = delta * rotateSpeed; // apply angular velocity
+}
+
+function onPauseToggle() {
+    uiState.isPausedLocally = !uiState.isPausedLocally;
+
+    if (playerState.locked && !uiState.isPausedLocally) {
+        const playerB = findPlayer(clientWorld || world, playerState.targetID);
+
+        // ...send fire and aim to server...
+
+        playerState.locked = false;
+        updateFireStateUI();
+    }
+
+    clientBus.emit('send', { type: 'toggleTick', payload: {} });
 }

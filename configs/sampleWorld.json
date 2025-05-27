@@ -3,15 +3,15 @@
     {
       "type": "planet",
       "shape": { "generator": "circle", "args": [64, 80, 100] },
-      "position": [0, -200],
+      "position": [0, -300],
       "velocity": [150, 0],
       "rotation": { "angle": 10, "omega": -0.3 }
     },
     {
-      "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 80, 100] },
-      "position": [200, 0],
-      "velocity": [0, 150],
+      "type": "debris",
+      "shape": { "generator": "circle", "args": [64, 15] },
+      "position": [-100, -350],
+      "velocity": [150, 0],
       "rotation": { "angle": 10, "omega": 0.2 }
     },
 
