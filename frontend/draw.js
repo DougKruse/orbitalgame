@@ -169,7 +169,7 @@ function drawInfoBoxes(selectedBodies = []) {
         div.style.overflowX = "auto";
 
         // Title
-        div.innerHTML = `<div style="font-weight:bold;font-size:15px;margin-bottom:5px;">${body.type || body.ID}</div>`;
+        div.innerHTML = `<div style="font-weight:bold;font-size:15px;margin-bottom:5px;">${body.ID || body.ID}</div>`;
 
         // Specific debug display (prettified for your structure)
         // Attractors

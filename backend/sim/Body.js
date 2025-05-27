@@ -13,7 +13,7 @@ export class Body {
         this.angle = angle;
         this.omega = omega;
         this.mass = mass;
-        this.ID  = 'body' + bodyID++;
+        this.ID  = type + bodyID++;
         this.type = type ?? 'body';
         this.destroyed = false;
     }
