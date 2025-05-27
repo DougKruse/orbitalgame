@@ -1,6 +1,8 @@
 Canvas changes
 	Moveable camera, scaleable zoom, translation between screen area and real area methods for ease and future. 
-	Trails every  x frames for each object, switching between visualizes. Cap amount is high.
+	Trails every  x frames for each object (hidden by default), switching via click toggles visualization for each. each trail Cap amount is high enough to show a recent orbit or two
+	Stop player object flying into mars
+	Re-add firing as button
 
 Gravity changes
 	Not affecting players, flags below.
@@ -32,6 +34,7 @@ Weapons
 	Basic npc
 	Items rotating with body they are on,  moving with it, tied to it unless something happens.
 
+Figure out UI on canvas, what it looks like doing, make workflow for it, etc.
 
 Other interesting shapes: 
 	That rounded triangle thing.
@@ -41,6 +44,8 @@ Source non-symmetric shape ideas that still work ok.
 
 Shapes being able to get their own center seems crutial for non-symmetrical shapes. (only if their rotation is to be adjusted, which seems a mixed bag, too complicated for good gamesmanship, too complicated if when your planet gets half destroyed your spinning changes immensely or gravity, more likely that just treat as before in this case.
 Non symmetrical shapes in general seem like interesting idea for livening up space considering limits on aspect ratio. Like ones that are initially created unsymmetrical.
+
+
 
 
 	

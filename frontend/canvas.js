@@ -27,10 +27,15 @@ export const localPlayer = new Player({ targetID: 'player0' });
 localPlayer.registerMouseControl(canvas);
 registerInteractions(canvas, uiState, () => world); // Pass in live world getter
 
+
+let frameCount = 0;
+const TRAIL_INTERVAL = 30; // Record trail every 30 frames
+
+
 // Main loop
 function mainLoop() {
-    // Possibly update player control
-    // updatePlayerControl(clientWorld);
+    frameCount++;
+    maybeRecordTrails(frameCount);
 
     drawWorld(ctx, canvas)
     requestAnimationFrame(mainLoop);
@@ -39,17 +44,19 @@ function mainLoop() {
 mainLoop();
 
 
-clientBus.on('paused', (payload) => {
-    uiState.isPausedServer = true;
-});
-clientBus.on('STATE_UPDATE', (payload) => {
-    // Float32Array conversion
-    for (const body of payload.bodies) {
-        const shape = body.shape;
-        if (!(shape.r instanceof Float32Array)) shape.r = new Float32Array(shape.r);
-        if (!(shape.angles instanceof Float32Array)) shape.angles = new Float32Array(shape.angles);
+// Move to debug file later
+// Or use idea as needed for visuals
+// Other visuals will be in visuals file
+function maybeRecordTrails(frame) {
+    if (frame % TRAIL_INTERVAL !== 0) return;
+    for (const body of uiState.clientWorld.bodies) {
+        if (!uiState.trails[body.ID]) uiState.trails[body.ID] = [];
+        const trail = uiState.trails[body.ID];
+        const last = trail[trail.length - 1];
+        if (!last || last[0] !== body.x || last[1] !== body.y) {
+            trail.push([body.x, body.y]);
+            // Optional cap on length
+            if (trail.length > 360) trail.shift();
+        }
     }
-    uiState.isPausedServer = false;
-    world = payload;
-    clientWorld = structuredClone(payload);
-});
+}

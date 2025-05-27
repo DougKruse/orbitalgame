@@ -1,5 +1,4 @@
 import * as at from "../shared/angleTools.js";
-import { clientBus } from './clientBus.js';
 import { uiState } from './state.js';
 
 export class Player {
@@ -24,14 +23,22 @@ export class Player {
         canvas.addEventListener('mousemove', e => {
             if (this.locked) return;
             const rect = canvas.getBoundingClientRect();
-            this.mouse.x = e.clientX - rect.left - canvas.width / 2;
-            this.mouse.y = e.clientY - rect.top - canvas.height / 2;
+            // Mouse position relative to the canvas
+            const sx = e.clientX - rect.left;
+            const sy = e.clientY - rect.top;
+            // Use viewport to convert to world coordinates
+            const [wx, wy] = uiState.viewport.screenToWorld([sx, sy], canvas);
+            this.mouse.x = wx;
+            this.mouse.y = wy;
         });
+
         canvas.addEventListener('click', e => {
+            // Only handle click if locally paused (from uiState)
             if (!uiState.isPausedLocally) return;
             this.locked = !this.locked;
         });
     }
+
 
     // On tick, will default to controlling first controlled object if multiple
     updateControl(world) {

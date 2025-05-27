@@ -1,59 +1,70 @@
 import { uiState } from './state.js';
 
+// Main draw orchestrator
 export function drawWorld(ctx, canvas) {
     const world = uiState.clientWorld;
     const viewport = uiState.viewport;
     const trails = uiState.trails;
-    const selectedBodyID = uiState.selectedBodyID;
+    const selectedIDs = uiState.selectedIDs;
     const showSpokes = uiState.showSpokes;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw trails for all selected (could be toggled for more bodies if needed)
-    if (selectedBodyID && trails[selectedBodyID]) {
-        ctx.save();
-        ctx.strokeStyle = "orange";
-        ctx.lineWidth = 2;
-        const t = trails[selectedBodyID];
-        if (t.length) {
-            ctx.beginPath();
-            const [startX, startY] = viewport.worldToScreen(t[0], canvas);
-            ctx.moveTo(startX, startY);
-            for (let i = 1; i < t.length; i++) {
-                const [px, py] = viewport.worldToScreen(t[i], canvas);
-                ctx.lineTo(px, py);
-            }
-            ctx.stroke();
+    // Draw trails for all selected
+    for (const id of selectedIDs) {
+        if (trails[id] && trails[id].length > 1) {
+            drawTrail(ctx, trails[id], {
+                viewport,
+                canvas,
+                color: "orange",
+                width: 2
+            });
         }
-        ctx.restore();
     }
 
-    // Draw bodies
+    // Draw all bodies
     for (const body of world.bodies) {
         drawBody(ctx, body, {
-            isSelected: selectedBodyID === body.ID,
+            isSelected: selectedIDs.has(body.ID),
             showSpokes,
             viewport,
-            canvas,
+            canvas
         });
     }
 }
 
-function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
+// Draw only a trail, no state mutation
+export function drawTrail(ctx, trail, { viewport, canvas, color = "orange", width = 2 }) {
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.beginPath();
+    const [startX, startY] = viewport.worldToScreen(trail[0], canvas);
+    ctx.moveTo(startX, startY);
+    for (let i = 1; i < trail.length; i++) {
+        const [x, y] = viewport.worldToScreen(trail[i], canvas);
+        ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.restore();
+}
+
+// Draw a single body
+export function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
     const { shape, x, y, r: radius = 20, angle = 0 } = body;
     const center = viewport.worldToScreen([x, y], canvas);
 
-    // Draw filled body (background for picking)
-    ctx.save();
-    ctx.globalAlpha = 0.6;
-    ctx.beginPath();
-    ctx.arc(center[0], center[1], radius * viewport.zoom, 0, 2 * Math.PI);
-    ctx.fillStyle = '#ddd';
-    ctx.fill();
-    ctx.globalAlpha = 1.0;
-    ctx.restore();
+    // Fill body
+    // ctx.save();
+    // ctx.globalAlpha = 0.6;
+    // ctx.beginPath();
+    // ctx.arc(center[0], center[1], radius * viewport.zoom, 0, 2 * Math.PI);
+    // ctx.fillStyle = '#ddd';
+    // ctx.fill();
+    // ctx.globalAlpha = 1.0;
+    // ctx.restore();
 
-    // Draw spokes if enabled and shape is defined
+    // Spokes
     if (showSpokes && shape && shape.angles && shape.r) {
         ctx.save();
         ctx.strokeStyle = 'lightgreen';
@@ -72,7 +83,7 @@ function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
         ctx.restore();
     }
 
-    // Draw outline
+    // Outline
     ctx.save();
     ctx.strokeStyle = isSelected ? "orange" : "black";
     ctx.lineWidth = isSelected ? 3 : 1;
@@ -90,13 +101,12 @@ function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
         }
         ctx.closePath();
     } else {
-        // Fallback to simple circle if shape missing
         ctx.arc(center[0], center[1], radius * viewport.zoom, 0, 2 * Math.PI);
     }
     ctx.stroke();
     ctx.restore();
 
-    // Draw label
+    // Label
     ctx.save();
     ctx.font = isSelected ? "bold 16px sans-serif" : "14px sans-serif";
     ctx.fillStyle = isSelected ? "orange" : "black";

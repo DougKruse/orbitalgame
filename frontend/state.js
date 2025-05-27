@@ -5,7 +5,7 @@ export const uiState = {
     isPausedLocally: false,
     isPausedServer: false,
     showSpokes: false,
-    selectedBodyID: null,
+    selectedIDs: new Set(),
     trails: {}, // { [bodyID]: Array<[x,y]> },
     world: new World(),
     clientWorld: new World(),
