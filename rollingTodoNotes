@@ -1,7 +1,12 @@
-Canvas changes
-	Moveable camera, scaleable zoom, translation between screen area and real area methods for ease and future. 
-	Trails every  x frames for each object (hidden by default), switching via click toggles visualization for each. each trail Cap amount is high enough to show a recent orbit or two
-	Stop player object flying into mars
+Canvas changes	
+	Gravity debug tools
+	Make sure needed things are sent from server to client
+	x-able to be able to deselect
+	Hover highlights body
+	Name of body header
+
+
+Stop player object flying into mars
 	Re-add firing as button
 
 Gravity changes

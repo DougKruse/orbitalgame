@@ -33,7 +33,7 @@ export class Gravity {
             // TODO: Find if dominant
             const mainAttractor = body.attractors?.[0];
             if (mainAttractor) {
-                Gravity.applyElasticOrbit(body, mainAttractor, dt);
+                // Gravity.applyElasticOrbit(body, mainAttractor, dt);
             }
 
 
@@ -42,11 +42,35 @@ export class Gravity {
             body.vx += fx / mass * dt;
             body.vy += fy / mass * dt;
 
-            // Inherit parent velocity for rendering/world movement
-            if (body.parent) {
-                const [pvx, pvy] = this.getWorldVelocity(body.parent);
-                body.vx += pvx; body.vy += pvy;
-            }
+
+            // Gravity Debug info
+            body.gravityDebug = {
+                attractorIDs: body.attractors?.map(a => a.ID),          // All current attractors by ID
+                parentID: body.parent?.ID,                              // Parent's ID
+                distances: body.attractors?.map(a => Gravity.distance(body, a)), // Distance to each attractor
+                hillRadii: body.attractors?.map(a =>
+                    a.parent ? Gravity.getHillRadius(a, a.parent) : null), // Hill radius for each attractor
+                withinHill: body.attractors?.map((a, i) => {
+                    const d = Gravity.distance(body, a);
+                    const rHill = a.parent ? Gravity.getHillRadius(a, a.parent) : Infinity;
+                    return d < rHill;
+                }),
+                isParentHillPrimary: (() => {
+                    // Whether body is within its parent's Hill sphere
+                    if (!body.parent) return false;
+                    const d = Gravity.distance(body, body.parent);
+                    const rHill = body.parent.parent ? Gravity.getHillRadius(body.parent, body.parent.parent) : Infinity;
+                    return d < rHill;
+                })(),
+                forces: body.attractors?.map(a => Gravity.gravityForce(body, a)), // force vector from each attractor
+            };
+
+
+            // Only do this when spawning things
+            // if (body.parent) {
+            //     const [pvx, pvy] = this.getWorldVelocity(body.parent);
+            //     body.vx += pvx; body.vy += pvy;
+            // }
         }
     }
 

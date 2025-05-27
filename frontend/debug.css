@@ -1,0 +1,9 @@
+.infobox::-webkit-scrollbar {
+    width: 6px;
+    background: #222;
+}
+
+.infobox::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 6px;
+}

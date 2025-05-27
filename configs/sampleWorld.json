@@ -2,17 +2,19 @@
   "bodies": [
     {
       "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 80, 100] },
-      "position": [0, -300],
-      "velocity": [150, 0],
-      "rotation": { "angle": 10, "omega": -0.3 }
+      "shape": { "generator": "circle", "args": [32, 20] },
+      "position": [300, 0],
+      "velocity": [0, 4.08],
+      "rotation": { "angle": 10, "omega": -0.3 },
+      "mass" : 30
     },
     {
-      "type": "debris",
-      "shape": { "generator": "circle", "args": [64, 15] },
-      "position": [-100, -350],
-      "velocity": [150, 0],
-      "rotation": { "angle": 10, "omega": 0.2 }
+      "type": "planet",
+      "shape": { "generator": "circle", "args": [16, 6] },
+      "position": [350, 0],
+      "velocity": [0, 4.85],
+      "rotation": { "angle": 10, "omega": 0.2 },
+      "mass" : 1
     },
 
     {
@@ -20,7 +22,8 @@
       "shape": { "generator": "circle", "args": [64, 40] },
       "position": [0, 0],
       "velocity": [0, 0],
-      "rotation": { "angle": 0, "omega": 0 }
+      "rotation": { "angle": 0, "omega": 0 },
+      "mass" : 5000
     },
     {
       "type": "debris",
