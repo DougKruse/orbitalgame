@@ -21,7 +21,7 @@ export class CollisionHandler {
 
                     // if a is a proj
                     if ( aP ){
-                        console.log(`[COLLISION] ${a.ID} -> ${b.ID}`);
+                        // console.log(`[COLLISION] ${a.ID} -> ${b.ID}`);
                         const localBiteCenter = worldToLocal(b, collide.contactPoint);
 
                         shapeTools.applyCircularBite({
@@ -34,7 +34,7 @@ export class CollisionHandler {
 
                     // if b is a proj
                     if ( bP) {
-                        console.log(`[COLLISION] ${a.ID} <- ${b.ID}`);
+                        // console.log(`[COLLISION] ${a.ID} <- ${b.ID}`);
                         const localBiteCenter = shapeTools.worldToLocal(a, collide.contactPoint);
 
                         shapeTools.applyCircularBite({
@@ -46,7 +46,7 @@ export class CollisionHandler {
                     }
                     // if neither are
                     if ( !aP && !bP){
-                        console.log(`[COLLISION] ${a.ID} ↔ ${b.ID}`);
+                        // console.log(`[COLLISION] ${a.ID} ↔ ${b.ID}`);
 
                         Physics.resolveElasticCollision(a, b,
                             {

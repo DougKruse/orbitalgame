@@ -1,0 +1,134 @@
+{
+    "bodies": [
+        {
+            "type": "star",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    40
+                ]
+            },
+            "position": [
+                0,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    200
+                ]
+            },
+            "position": [
+                1000,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": 1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    200
+                ]
+            },
+            "position": [
+                -1000,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": 1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    200
+                ]
+            },
+            "position": [
+                2000,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    200
+                ]
+            },
+            "position": [
+                -2000,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        }
+    ]
+}

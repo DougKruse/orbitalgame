@@ -1,7 +1,7 @@
 // physics/GravitySystem.js
 export class Gravity {
     
-    static GRAVITY_CONSTANT = 1;
+    static GRAVITY_CONSTANT = 5;
     static TYPE_RANK = {
         'projectile': 0,
         'debris': 0,
@@ -33,7 +33,7 @@ export class Gravity {
             // TODO: Find if dominant
             const mainAttractor = body.attractors?.[0];
             if (mainAttractor) {
-                // Gravity.applyElasticOrbit(body, mainAttractor, dt);
+                Gravity.applyElasticOrbit(body, mainAttractor, dt);
             }
 
 
@@ -62,7 +62,12 @@ export class Gravity {
                     const rHill = body.parent.parent ? Gravity.getHillRadius(body.parent, body.parent.parent) : Infinity;
                     return d < rHill;
                 })(),
-                forces: body.attractors?.map(a => Gravity.gravityForce(body, a)), // force vector from each attractor
+                idealCircularOrbitVelocities: body.attractors?.map(a => {
+                    const G = Gravity.GRAVITY_CONSTANT || 1;
+                    const r = Gravity.distance(body, a);
+                    return (r > 0 && isFinite(r)) ? Math.sqrt(G * (a.mass || 0) / r) : 0;
+                }),
+                //forces: body.attractors?.map(a => Gravity.gravityForce(body, a)), // force vector from each attractor
             };
 
 
@@ -299,6 +304,15 @@ export class Gravity {
         // Only damp *radial* motion: kill off ellipse, keep energy in tangential
         body.vx -= ux * vRadial * RADIAL_DAMP * dt;
         body.vy -= uy * vRadial * RADIAL_DAMP * dt;
+    }
+
+    static idealOrbitVelocityVector(body, center, G = this.GRAVITY_CONSTANT, polarity = 1) {
+        const dx = body.x - center.x;
+        const dy = body.y - center.y;
+        const r = Math.hypot(dx, dy);
+        const vMag = Math.sqrt(G * center.mass / r);
+        // Tangent: (−dy, dx)/r
+        return [polarity * (-dy / r) * vMag, polarity * (dx / r) * vMag];
     }
 
 

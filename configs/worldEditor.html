@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>World Editor</title>
+    <link rel="stylesheet" href="worldEditor.css" />
+</head>
+
+<body>
+    <div id="editor">
+        <section id="ringControls">
+            <button id="addRing">Add Ring</button>
+            <div id="rings"></div>
+        </section>
+        <section id="previewCanvas">
+            <canvas id="worldCanvas" width="800" height="800"></canvas>
+        </section>
+        <section id="output">
+            <button id="exportJSON">Export JSON</button>
+            <button id="copyJSON">Copy to Clipboard</button>
+            <pre id="jsonOut"></pre>
+        </section>
+    </div>
+    <script src="templates.js"></script>
+    <script src="basicEditor.js"></script>
+</body>
+
+</html>

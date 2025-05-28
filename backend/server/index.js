@@ -8,7 +8,9 @@ import { SimLoop } from '../sim/tick.js';
 import { setupSocket } from './socket.js';
 import { setupController } from '../sim/controller.js';
 
-const CONFIG = 'configs/sampleWorld.json';
+// const CONFIG = 'configs/sampleWorld.json';
+const CONFIG = 'configs/generatedWorld.json';
+
 
 export function startServer() {
     const app = express();
@@ -47,6 +49,10 @@ export function startServer() {
                     sim.setWorld(newW);
                     // immediate emit if you want an instant update:
                     // bus.emit('state', newW);
+                    bus.emit('sendAllClients', {
+                        type: 'reset',
+                        payload: {}
+                    });
                 } catch (err) {
                     console.error('  reload error', err);
                 }
