@@ -1,36 +1,29 @@
-Canvas changes	
-	Gravity debug tools
-	Make sure needed things are sent from server to client
-	x-able to be able to deselect
-	Hover highlights body
-	Name of body header
-	the forces, they do nothing
-	add elastic debugging
 
 
 Stop player object flying into mars
 	Re-add firing as button
 
 Gravity changes
-	Not affecting players, flags below.
+	Sun is 99.8 of mass of solar system. Test what we wan it as.
+	cheat a *lot* more as far as orbits. We want them not to fall apart *ever* unless something special happens. No decay, cheat, lock (in that force moves to a larger/smaller stable orbit instead of fucking
+	Not affecting players, flags for bodies.
 	bind player to planet, spin, movement, adhere to surface.
-	Test larger systems, holes, multiple suns
-	Figure out how much empty space is needed for gravity to function
-	Adjust gravity values as needed for whitespace.
+	// Test larger systems, holes, multiple suns (nope!)
+	Adjust gravity values as needed for correct speed
 	Figure how much speed is needed to escape stable orbit
 		Apply at vector perpendicular to orbit for honest amount
 		Good test for more advanced weapon system
-
-Assign random attractor value, iterate to 10, flag check at 10.
-
-
 	affectsGravity (boolean): participates in gravity as attractor (true for stars, planets, black hole, not for projectiles/debris)
-
 	isCollidable (boolean): can be hit (true for all except, e.g., forcefield-only objects)
+	canBeMoved (boolean): Might need for sun, lets leave until that happens
+	Find out how to seed objects into orbit velocity, not manually
+		flag on creation
+	Get moons working
 
-	canBeMoved (boolean): can be moved by force events / collision (projectiles: false; planets: yes, but threashold, stars / holes no.) Perhaps have "order" value in terms of what it can effect, perhaps function of strength. Need to figure out mass effect on this force anyway, so that small objects are more effected (but dont go to ludicrious speeds given smaller space of domain).
 
-Orbit and rotation speed slower for each increase in scale. (E.G. planet around sun every 5 rounds, sun around universe every 20, etc.
+Performance
+	Attractors less often, locking if not pushed hard.	
+		Assign random attractor value, iterate to 10, flag check at 10.
 
 
 debris from bites, likely multiple chunks over direct large chunk. Need to fly away from object they came from, not back into it, no celings make this easy, easy to get range of shortened angles.
@@ -41,16 +34,20 @@ Weapons
 	Basic npc
 	Items rotating with body they are on,  moving with it, tied to it unless something happens.
 
-Figure out UI on canvas, what it looks like doing, make workflow for it, etc.
+Canvas changes	
+	x-able to be able to deselect
+	Hover highlights body
+	add elastic debugging
+	Add speed
+
+
+Figure out UI on canvas (not on canvas! Dom!), what it looks like doing, make workflow for it, etc. Canvas would be prettier, so likely want that. Match Aestetic. Dev ui can be dom of course for ease. This would then need layering. Perhaps overlapping canvas windows, can you do that for ui layer? Probably bad idea, viewport should be able to isolate these two. 
 
 Other interesting shapes: 
 	That rounded triangle thing.
 	hypershape construct made of joined shapes? This likely works, just need refinement. Likely special class of body has this.
 
 Source non-symmetric shape ideas that still work ok.
-
-Shapes being able to get their own center seems crutial for non-symmetrical shapes. (only if their rotation is to be adjusted, which seems a mixed bag, too complicated for good gamesmanship, too complicated if when your planet gets half destroyed your spinning changes immensely or gravity, more likely that just treat as before in this case.
-Non symmetrical shapes in general seem like interesting idea for livening up space considering limits on aspect ratio. Like ones that are initially created unsymmetrical.
 
 
 
