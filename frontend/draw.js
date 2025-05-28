@@ -1,5 +1,8 @@
 import { uiState } from './state.js';
 
+
+const DEBUG_OUTLINE = '#9e9e9e'
+
 // Main draw orchestrator
 export function drawWorld(ctx, canvas) {
     const world = uiState.clientWorld;
@@ -89,7 +92,7 @@ function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
 
     // Outline
     ctx.save();
-    ctx.strokeStyle = isSelected ? "orange" : "black";
+    ctx.strokeStyle = isSelected ? "orange" : DEBUG_OUTLINE;
     ctx.lineWidth = isSelected ? 3 : 1;
     ctx.beginPath();
     if (shape && shape.angles && shape.r) {
@@ -113,10 +116,10 @@ function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
     // Label
     ctx.save();
     ctx.font = isSelected ? "bold 16px sans-serif" : "14px sans-serif";
-    ctx.fillStyle = isSelected ? "orange" : "black";
+    ctx.fillStyle = isSelected ? "orange" : DEBUG_OUTLINE;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(body.type || body.ID, center[0], center[1]);
+    ctx.fillText(body.ID || body.type, center[0], center[1]);
     ctx.restore();
 }
 
@@ -205,6 +208,12 @@ function drawInfoBoxes(selectedBodies = []) {
                 </div>`;
             });
         }
+        
+        // Ideal Orbit Velo
+        if (dbg.idealCircularOrbitVelocities) {
+            div.innerHTML += `<div>idealOrbitV: <span style="color:#fff">${fmt(dbg.idealCircularOrbitVelocities)}</span></div>`;
+        }
+
 
         // Pad/space and stack boxes upward if overflow
         boxDiv.prepend(div);
