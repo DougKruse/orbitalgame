@@ -2,99 +2,52 @@
   "bodies": [
     {
       "type": "star",
-      "shape": { "generator": "circle", "args": [64, 40] },
-      "position": [0, 0],
-      "velocity": [0, 0],
-      "rotation": { "angle": 0, "omega": 0 }
+      "shape": {
+        "generator": "circle",
+        "args": [
+          64,
+          500
+        ]
+      },
+      "center": [
+        0,
+        0
+      ],
+      "mass": 2e6
     },
     {
       "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 200] },
-      "position": [400, 0],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": 1 } } 
-    },
-    {
-      "type": "asteroid",
-      "shape": { "generator": "circle", "args": [32, 30] },
-      "position": [1200, -1200],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": 0.2 },
-      "flag": { "orbitSeed": { "direction": 1 } } 
-    },
-    {
-      "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 320] },
-      "position": [0, -2000],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": 1 } } 
+      "shape": {
+        "generator": "circle",
+        "args": [
+          64,
+          150
+        ]
+      },
+      "orbit": {
+        "centerID": 0,
+        "radius": 2500,
+        "period": 80,
+        "phase": 0
+      },
+      "mass": 1000
     },
     {
       "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 320] },
-      "position": [0, 2000],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": 1 } } 
-    },
-        {
-      "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 420] },
-      "position": [3000, 0],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": -1 } }
-    },
-    {
-      "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 420] },
-      "position": [-3000, 0],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": -1 } } 
-    },
-    {
-      "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 420] },
-      "position": [0, -3e3],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": -1 } } 
-    },
-    {
-      "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 420] },
-      "position": [0, 3e3],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": -1 } } 
-    },
-    {
-      "type": "planet",
-      "shape": { "generator": "circle", "args": [64, 300] },
-      "position": [0, -1200],
-      "velocity": [0, 0],
-      "rotation": { "angle": 10, "omega": -0.3 },
-      "flag": { "orbitSeed": { "direction": -1 } } 
-    },
-
-    {
-      "type": "debris",
-      "shape": { "generator": "circle", "args": [12, 10] },
-      "position": [-250, 200],
-      "velocity": [-200, -200],
-      "rotation": { "angle": 10, "omega": 0.1 }
-    }
-  ],
-  "playerObjects": [
-    {
-      "type": "player",
-      "shape": { "generator": "offsetBox", "args": [32, 20, 100] },
-      "position": [0, 400],
-      "velocity": [0, 0],
-      "rotation": { "angle": 3.14, "omega": 0 }
+      "shape": {
+        "generator": "circle",
+        "args": [
+          64,
+          90
+        ]
+      },
+      "orbit": {
+        "centerID": 1,
+        "radius": 400,
+        "period": 20,
+        "phase": 1.3
+      },
+      "mass": 15
     }
   ]
 }

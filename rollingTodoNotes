@@ -1,12 +1,18 @@
-
+World builder.
+	Astroid cloud, mixed rings (asteroids and planets)
+	Special Asteroids (different shape)
+	
+	
 
 Stop player object flying into mars
 	Re-add firing as button
 
 Gravity changes
-	Sun is 99.8 of mass of solar system. Test what we wan it as.
-	cheat a *lot* more as far as orbits. We want them not to fall apart *ever* unless something special happens. No decay, cheat, lock (in that force moves to a larger/smaller stable orbit instead of fucking
+	Elastic function speeds up those with slightly lower orbit radius, needs to just flex orbit (and likely track what it should be)
+	cheat a *lot* more as far as orbits. We want them not to fall apart *ever* unless something special happens. No decay, cheat, lock (in that force moves to a larger/smaller stable orbit instead of collapsing.
+	moons.
 	Not affecting players, flags for bodies.
+	Sun is 99.8 of mass of solar system. Test what we wan it as.
 	bind player to planet, spin, movement, adhere to surface.
 	// Test larger systems, holes, multiple suns (nope!)
 	Adjust gravity values as needed for correct speed
@@ -18,7 +24,6 @@ Gravity changes
 	canBeMoved (boolean): Might need for sun, lets leave until that happens
 	Find out how to seed objects into orbit velocity, not manually
 		flag on creation
-	Get moons working
 
 
 Performance

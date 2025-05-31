@@ -18,7 +18,6 @@ export class Body {
         this.destroyed = false;
     }
 
-    // Optional: derived helpers
     get position() { return [this.x, this.y]; }
     get velocity() { return [this.vx, this.vy]; }
     get rot() { return { angle: this.angle, omega: this.omega }; }

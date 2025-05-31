@@ -1,5 +1,6 @@
 import * as gen from './shapes/generators.js';
 import { Body } from './Body.js';
+import { RailOrbitBody } from './BodyVariants.js';
 import { readFileSync } from 'fs';
 import { World } from './World.js';
 import { Gravity } from './Gravity.js'; 
@@ -13,6 +14,8 @@ export function loadWorldConfig(json) {
     json = loadFile(json);
 
     const world = new World();
+
+    totalMass = 0;
 
 
     // generic bodies
@@ -29,7 +32,7 @@ export function loadWorldConfig(json) {
     const sun = world.bodies.find(b => b.type === 'star');
     if (!sun) throw new Error("No star found in system for seeding orbits.");
     // Sun should be at least 90% of total system mass, irl is 99.8%
-    // console.log(sun.mass / totalMass);
+    console.log(sun.mass / totalMass);
 
 
     // Seed velocities for flagged bodies

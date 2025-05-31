@@ -1,6 +1,6 @@
 import { Projectile } from "./BodyVariants.js";
 import { Physics } from "./physics.js";
-import { Gravity } from "./Gravity.js";
+import { RailOrbitBody } from "./BodyVariants.js"
 import { CollisionHandler } from "./CollisionHandler.js";
 export class World {
     constructor() {
@@ -53,8 +53,24 @@ export class World {
     
     step(dt, frame) {
         CollisionHandler.handleCollisions(this);
-        Gravity.updateGravity(this, dt, frame);
         this.removeDestroyed();
+        
+        for (const body of this.bodies) {
+            if (body instanceof RailOrbitBody) {
+                body.update(dt);
+            }
+            //else if (body instanceof FreeBody) {
+            //     // Find all attractors (filter by type, etc)
+            //     let fx = 0, fy = 0;
+            //     for (const attractor of world.bodies) {
+            //         if (attractor === body || !attractor.mass) continue;
+            //         const [gx, gy] = Gravity.gravityForce(body, attractor);
+            //         fx += gx; fy += gy;
+            //     }
+            //     body.update(dt, fx, fy);
+            //}
+        }
+        
         Physics.integrate(this.bodies, dt);
     }
 }

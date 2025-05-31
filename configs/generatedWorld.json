@@ -28,11 +28,11 @@
                 "generator": "circle",
                 "args": [
                     64,
-                    200
+                    60
                 ]
             },
             "position": [
-                1000,
+                600,
                 0
             ],
             "velocity": [
@@ -55,11 +55,11 @@
                 "generator": "circle",
                 "args": [
                     64,
-                    300
+                    120
                 ]
             },
             "position": [
-                2000,
+                1400,
                 0
             ],
             "velocity": [
@@ -82,12 +82,12 @@
                 "generator": "circle",
                 "args": [
                     64,
-                    300
+                    120
                 ]
             },
             "position": [
-                -1000,
-                1732
+                -1400,
+                0
             ],
             "velocity": [
                 0,
@@ -109,12 +109,147 @@
                 "generator": "circle",
                 "args": [
                     64,
-                    300
+                    160
                 ]
             },
             "position": [
-                -1000,
-                -1732
+                2400,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": 1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    160
+                ]
+            },
+            "position": [
+                -2400,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": 1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    160
+                ]
+            },
+            "position": [
+                3800,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    160
+                ]
+            },
+            "position": [
+                0,
+                3800
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    160
+                ]
+            },
+            "position": [
+                -3800,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    160
+                ]
+            },
+            "position": [
+                0,
+                -3800
             ],
             "velocity": [
                 0,
@@ -137,195 +272,6 @@
                 "args": [
                     64,
                     400
-                ]
-            },
-            "position": [
-                3000,
-                0
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "planet",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    64,
-                    400
-                ]
-            },
-            "position": [
-                0,
-                -3000
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "planet",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    64,
-                    400
-                ]
-            },
-            "position": [
-                -3000,
-                0
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "planet",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    64,
-                    400
-                ]
-            },
-            "position": [
-                0,
-                3000
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "planet",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    64,
-                    300
-                ]
-            },
-            "position": [
-                4000,
-                0
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": -1
-                }
-            }
-        },
-        {
-            "type": "planet",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    64,
-                    300
-                ]
-            },
-            "position": [
-                -2000,
-                3464
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": -1
-                }
-            }
-        },
-        {
-            "type": "planet",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    64,
-                    300
-                ]
-            },
-            "position": [
-                -2000,
-                -3464
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": -1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
                 ]
             },
             "position": [
@@ -347,255 +293,12 @@
             }
         },
         {
-            "type": "asteroid",
+            "type": "planet",
             "shape": {
                 "generator": "circle",
                 "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                4755,
-                -1545
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                4045,
-                -2939
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                2939,
-                -4045
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                1545,
-                -4755
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                0,
-                -5000
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                -1545,
-                -4755
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                -2939,
-                -4045
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                -4045,
-                -2939
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                -4755,
-                -1545
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
+                    64,
+                    400
                 ]
             },
             "position": [
@@ -621,13 +324,2173 @@
             "shape": {
                 "generator": "circle",
                 "args": [
-                    16,
-                    51
+                    32,
+                    30
                 ]
             },
             "position": [
-                -4755,
-                1545
+                6000,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5982,
+                471
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5926,
+                939
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5834,
+                1401
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5706,
+                1854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5543,
+                2296
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5346,
+                2724
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5116,
+                3135
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                4854,
+                3527
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                4562,
+                3897
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                4243,
+                4243
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                3897,
+                4562
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                3527,
+                4854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                3135,
+                5116
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                2724,
+                5346
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                2296,
+                5543
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                1854,
+                5706
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                1401,
+                5834
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                939,
+                5926
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                471,
+                5982
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                0,
+                6000
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -471,
+                5982
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -939,
+                5926
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -1401,
+                5834
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -1854,
+                5706
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -2296,
+                5543
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -2724,
+                5346
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -3135,
+                5116
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -3527,
+                4854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -3897,
+                4562
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -4243,
+                4243
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -4562,
+                3897
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -4854,
+                3527
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5116,
+                3135
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5346,
+                2724
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5543,
+                2296
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5706,
+                1854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5834,
+                1401
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5926,
+                939
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5982,
+                471
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -6000,
+                0
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5982,
+                -471
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5926,
+                -939
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5834,
+                -1401
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5706,
+                -1854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5543,
+                -2296
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5346,
+                -2724
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -5116,
+                -3135
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -4854,
+                -3527
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -4562,
+                -3897
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -4243,
+                -4243
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -3897,
+                -4562
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -3527,
+                -4854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -3135,
+                -5116
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -2724,
+                -5346
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -2296,
+                -5543
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -1854,
+                -5706
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -1401,
+                -5834
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -939,
+                -5926
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                -471,
+                -5982
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                0,
+                -6000
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                471,
+                -5982
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                939,
+                -5926
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                1401,
+                -5834
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                1854,
+                -5706
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                2296,
+                -5543
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                2724,
+                -5346
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                3135,
+                -5116
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                3527,
+                -4854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                3897,
+                -4562
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                4243,
+                -4243
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                4562,
+                -3897
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                4854,
+                -3527
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5116,
+                -3135
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5346,
+                -2724
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5543,
+                -2296
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5706,
+                -1854
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5834,
+                -1401
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5926,
+                -939
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "asteroid",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    32,
+                    30
+                ]
+            },
+            "position": [
+                5982,
+                -471
+            ],
+            "velocity": [
+                0,
+                0
+            ],
+            "rotation": {
+                "angle": 0,
+                "omega": 0
+            },
+            "flag": {
+                "orbitSeed": {
+                    "direction": -1
+                }
+            }
+        },
+        {
+            "type": "planet",
+            "shape": {
+                "generator": "circle",
+                "args": [
+                    64,
+                    400
+                ]
+            },
+            "position": [
+                7500,
+                0
             ],
             "velocity": [
                 0,
@@ -644,17 +2507,17 @@
             }
         },
         {
-            "type": "asteroid",
+            "type": "planet",
             "shape": {
                 "generator": "circle",
                 "args": [
-                    16,
-                    51
+                    64,
+                    400
                 ]
             },
             "position": [
-                -4045,
-                2939
+                0,
+                -7500
             ],
             "velocity": [
                 0,
@@ -671,17 +2534,17 @@
             }
         },
         {
-            "type": "asteroid",
+            "type": "planet",
             "shape": {
                 "generator": "circle",
                 "args": [
-                    16,
-                    51
+                    64,
+                    400
                 ]
             },
             "position": [
-                -2939,
-                4045
+                -7500,
+                0
             ],
             "velocity": [
                 0,
@@ -698,152 +2561,17 @@
             }
         },
         {
-            "type": "asteroid",
+            "type": "planet",
             "shape": {
                 "generator": "circle",
                 "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                -1545,
-                4755
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
+                    64,
+                    400
                 ]
             },
             "position": [
                 0,
-                5000
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                1545,
-                4755
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                2939,
-                4045
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                4045,
-                2939
-            ],
-            "velocity": [
-                0,
-                0
-            ],
-            "rotation": {
-                "angle": 0,
-                "omega": 0
-            },
-            "flag": {
-                "orbitSeed": {
-                    "direction": 1
-                }
-            }
-        },
-        {
-            "type": "asteroid",
-            "shape": {
-                "generator": "circle",
-                "args": [
-                    16,
-                    51
-                ]
-            },
-            "position": [
-                4755,
-                1545
+                7500
             ],
             "velocity": [
                 0,
