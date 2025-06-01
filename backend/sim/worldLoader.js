@@ -1,6 +1,6 @@
 import * as gen from './shapes/generators.js';
 import { Body } from './Body.js';
-import { RailOrbitBody, FreeBody } from './BodyVariants.js';
+import { Planet } from './BodyVariants.js';
 import { readFileSync } from 'fs';
 import { World } from './World.js';
 
@@ -44,15 +44,30 @@ export function loadWorld(json) {
                 angularSpeed = 2 * Math.PI / orbit.period;
             }
 
-            instances[i] = new RailOrbitBody({
+            let instance = new Planet({
                 ...b,
                 shape,
-                center,
-                radius: orbit.radius,
-                angularSpeed,
-                phase: orbit.phase ?? 0
+                center
             });
-            world.addBody(instances[i]);
+            instances[i] = instance;
+            instance.movement = Planet.MovementTypes.RailOrbit({
+                center: center,
+                radius: orbit.radius,
+                angularSpeed: angularSpeed,
+                phase: orbit.phase ?? 0
+            })
+            world.addBody(instance);
+            
+
+            //Building Testing
+            if(instance.ID === "terra"){
+                instance.addBuilding(instance.NewBuilding({ size: 1, spoke: 7, type: 'test' }));
+                instance.addBuilding(instance.NewBuilding({ size: 1, spoke: 9, type: 'est' }));
+                instance.addBuilding(instance.NewBuilding({ size: 1, spoke: 11, type: 'st' }));
+                instance.addBuilding(instance.NewBuilding({ size: 1, spoke: 13, type: 't' }));
+
+
+            }
         }
     }
     // console.log(world.bodies);

@@ -1,6 +1,6 @@
 import { Projectile } from "./BodyVariants.js";
 import { Physics } from "./physics.js";
-import { RailOrbitBody } from "./BodyVariants.js"
+import { Body } from "./Body.js";
 import { CollisionHandler } from "./CollisionHandler.js";
 export class World {
     constructor() {
@@ -56,7 +56,7 @@ export class World {
         this.removeDestroyed();
         
         for (const body of this.bodies) {
-            if (body instanceof RailOrbitBody) {
+            if (body instanceof Body) {
                 body.update(dt);
             }
             //else if (body instanceof FreeBody) {

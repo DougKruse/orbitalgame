@@ -41,25 +41,25 @@ export class Player {
 
 
     // On tick, will default to controlling first controlled object if multiple
-    updateControl(world) {
-        const firstID = [...this.controlledIDs][0];
-        if (!firstID || !world) return;
-        const body = world.findById(firstID);
-        if (!body) return;
+    // updateControl(world) {
+    //     const firstID = [...this.controlledIDs][0];
+    //     if (!firstID || !world) return;
+    //     const body = world.findById(firstID);
+    //     if (!body) return;
 
-        const dx = this.mouse.x - body.x;
-        const dy = this.mouse.y - body.y;
-        const targetAngle = at.normalizeAngle(Math.atan2(dy, dx));
-        this.aimAngle = targetAngle;
+    //     const dx = this.mouse.x - body.x;
+    //     const dy = this.mouse.y - body.y;
+    //     const targetAngle = at.normalizeAngle(Math.atan2(dy, dx));
+    //     this.aimAngle = targetAngle;
 
-        if (this.locked) {
-            body.omega = 0;
-            return;
-        }
-        const delta = at.shortestPositiveDelta(body.angle, targetAngle) - Math.PI / 2;
-        const rotateSpeed = 0.3;
-        body.omega = delta * rotateSpeed;
-    }
+    //     if (this.locked) {
+    //         body.omega = 0;
+    //         return;
+    //     }
+    //     const delta = at.shortestPositiveDelta(body.angle, targetAngle) - Math.PI / 2;
+    //     const rotateSpeed = 0.3;
+    //     body.omega = delta * rotateSpeed;
+    // }
 
 
     // You can add a helper in Player for the main controlled id:

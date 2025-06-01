@@ -1,3 +1,5 @@
+import { uiState } from "./state.js";
+
 export class Viewport {
     constructor({
         x = 0,        // world-space center X
@@ -14,7 +16,7 @@ export class Viewport {
     }
 
     // Convert world coordinates to screen coordinates
-    worldToScreen([wx, wy], canvas) {
+    worldToScreen([wx, wy], canvas = uiState.canvas) {
         return [
             canvas.width / 2 + (wx - this.x) * this.zoom,
             canvas.height / 2 + (wy - this.y) * this.zoom
@@ -22,7 +24,7 @@ export class Viewport {
     }
 
     // Convert screen coordinates to world coordinates
-    screenToWorld([sx, sy], canvas) {
+    screenToWorld([sx, sy], canvas = uiState.canvas) {
         return [
             this.x + (sx - canvas.width / 2) / this.zoom,
             this.y + (sy - canvas.height / 2) / this.zoom

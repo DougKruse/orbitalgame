@@ -1,7 +1,7 @@
 import { uiState } from './state.js';
 import { handlePauseToggle } from './network.js';
 
-export function registerInteractions(canvas, world) {
+export function registerInteractions(canvas) {
 
     document.getElementById('toggleSpokesBtn').addEventListener('click', () => {
         uiState.showSpokes = !uiState.showSpokes;

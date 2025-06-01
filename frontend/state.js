@@ -1,5 +1,6 @@
 import { World } from "./World.js";
 import { Viewport } from './Viewport.js';
+import { Player } from "./Player.js";
 
 export const uiState = {
     isPausedLocally: false,
@@ -10,4 +11,6 @@ export const uiState = {
     world: new World(),
     clientWorld: new World(),
     viewport: new Viewport(),
+    localPlayer: new Player({ targetID: 'player0' }),
+    canvas: null,
 };

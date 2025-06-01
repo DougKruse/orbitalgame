@@ -34,6 +34,11 @@ export function drawWorld(ctx, canvas) {
             viewport,
             canvas
         });
+        drawBuildings(ctx, body, {
+            showSpokes,
+            viewport,
+            canvas
+        })
     }
 
     // Infoboxes
@@ -55,7 +60,6 @@ function drawTrail(ctx, trail, { viewport, canvas, color = "orange", width = 2 }
     ctx.stroke();
     ctx.restore();
 }
-
 // Draw a single body
 function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
     const { shape, x, y, r: radius = 20, angle = 0 } = body;
@@ -122,6 +126,77 @@ function drawBody(ctx, body, { isSelected, showSpokes, viewport, canvas }) {
     ctx.fillText(body.ID || body.type, center[0], center[1]);
     ctx.restore();
 }
+
+// Modular: draw buildings on a body's surface as small icons/markers
+export function drawBuildings(ctx, body, { viewport, canvas, showSpokes }) {
+    if (!Array.isArray(body.buildings) || !body.buildings.length) return;
+    const { x, y, angle = 0, shape } = body;
+    const center = viewport.worldToScreen([x, y], canvas);
+
+    // Calculate positions for each building
+    for (const building of body.buildings) {
+        // For now, assume each building is placed along a spoke (angle)
+        // and at distance matching the shape's radius for that spoke
+        let θ = 0, dist = 0;
+        const idx = building.spoke ?? 0;
+        θ = (shape.angles[idx % shape.angles.length] || 0) + angle;
+        dist = (shape.r[idx % shape.r.length] || 0);
+
+
+        // Offset outward from center
+        const pos = [
+            x + Math.cos(θ) * dist,
+            y + Math.sin(θ) * dist,
+        ];
+        const [screenX, screenY] = viewport.worldToScreen(pos, canvas);
+
+        // Draw marker for building (simple house/box for now)
+        ctx.save();
+        ctx.translate(screenX, screenY);
+
+        // Color and shape by type
+        let fill = "#49f";
+        if (building.type === "test") fill = "#4f9";
+        // ... extend as desired
+
+        ctx.beginPath();
+        ctx.arc(0, 0, 7, 0, 2 * Math.PI);
+        ctx.fillStyle = fill;
+        ctx.globalAlpha = 0.85;
+        ctx.fill();
+
+        // Optionally add an icon or label
+        ctx.globalAlpha = 1;
+        ctx.font = "bold 10px monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#222";
+        ctx.fillText(building.type[0]?.toUpperCase() || "?", 0, 0);
+
+        ctx.restore();
+
+        let playerAim = uiState.viewport.worldToScreen([uiState.localPlayer.mouse.x, uiState.localPlayer.mouse.y]);
+
+        if(building.type === 'test' && uiState.isPausedLocally){
+            buildingAim(ctx, [screenX, screenY], playerAim);
+        }
+    }
+}
+
+function buildingAim(ctx, pos, aim){
+    ctx.save();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([7,6]);
+    ctx.beginPath();
+    ctx.moveTo(pos[0], pos[1]);
+    ctx.lineTo(aim[0], aim[1]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+}
+
+
 
 // Utility to format floats and arrays for text display
 function fmt(val) {

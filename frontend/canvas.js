@@ -1,6 +1,5 @@
 import { drawWorld } from './draw.js';
 import { uiState } from './state.js';
-import { Player } from './Player.js';
 import { registerInteractions } from './interaction.js';
 import { connect } from './client.js';
 import { clientBus } from './clientBus.js';
@@ -8,13 +7,11 @@ import './network.js';
 
 
 
-let world = uiState.world;
-let clientWorld = uiState.clientWorld;
-
 
 // Canvas setup
 const canvas = document.getElementById('main');
 const ctx = canvas.getContext('2d');
+uiState.canvas = canvas;
 
 // Viewport/camera setup
 
@@ -23,9 +20,9 @@ const ctx = canvas.getContext('2d');
 connect();
 
 // Register controls (player, camera, selection, etc.)
-export const localPlayer = new Player({ targetID: 'player0' });
-localPlayer.registerMouseControl(canvas);
-registerInteractions(canvas, uiState, () => world); // Pass in live world getter
+
+uiState.localPlayer.registerMouseControl(canvas);
+registerInteractions(canvas); // Pass in live world getter
 
 
 let frameCount = 0;
